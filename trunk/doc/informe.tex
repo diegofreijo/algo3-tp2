@@ -1,0 +1,119 @@
+\documentclass[spanish, a4paper, 11pt]{article}
+
+\usepackage[a4paper,margin=3.5cm,top=3.0cm,bottom=3.0cm]{geometry}	% Define los margenes
+\usepackage[spanish,activeacute]{babel}								% Idioma castellano
+\usepackage{caratula}														% Caratula de Algo2
+%\usepackage[a4paper=true,pagebackref=true]{hyperref}				% Agrega la TOC al PDF e hipervinculos
+%\usepackage[pdftex]{graphicx} 											% Permite insertar graficos
+\usepackage{fancyhdr}														% Permite manejo de cabeceras de pagina
+\usepackage{eufrak}															% Usado en el enunciado del trabajo
+\usepackage{latexsym}
+\usepackage{algorithmic}													% Para escribir los algos
+\usepackage{dsfont}															% Para el simbolo de naturales
+
+
+% Estilo de pagina para tener las cabeceras
+\pagestyle{fancy}
+\lhead{AyED III - TP2}
+\rhead{Matias Blanco - Diego Freijo - Hernan Guebel - Marcos Rogani}
+
+% Numeracion de paginas
+\pagenumbering{arabic}
+\parskip=1.5ex
+
+% Seteo de estilo de los algoritmos
+\algsetup{indent=2em}
+
+\newcommand{\imagen}[3]
+{
+	\begin{figure}[h]
+	  \centering
+	%    \includegraphics[width=#2cm]{#1}
+	  \caption{#3}
+	\end{figure}
+}
+
+\newcommand{\nat}{\mathds{N}}
+\newcommand{\algoritmo}[3]{\noindent {\bf\underline{#1}:} #2 $\longrightarrow$ #3}
+\newcommand{\superindice}[1]{$^\textrm{{\tiny #1}}$}
+\newcommand{\subsubsubsection}[1]{
+
+{\bf\small #1}
+
+}
+\newcommand{\negrita}[1]{{\bf #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%   Inicio del documento
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caratula
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\materia{Algoritmos y Estructuras de Datos III}
+\submateria{Primer Cuatrimestre de 2007}
+\titulo{Trabajo Pr'actico 2}
+\subtitulo{}
+\integrante{Blanco, Matias}{508/05}{matiasblanco18@gmail.com}
+\integrante{Freijo, Diego}{4/05}{giga.freijo@gmail.com}
+\integrante{Guebel, Hernan}{??/??}{hguebel@gmail.com}
+\integrante{Rogani, Marcos}{??/??}{marcos.rogani@gmail.com}
+\maketitle
+
+\subsection*{Palabras Clave}
+Red-Black Trees, Interval Trees.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Indice
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\tableofcontents
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ejercicios
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{ej1.tex}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Enunciado
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%\section*{Enunciado}
+%----------------------------------------------------------------------------------%
+%??????????????????
+%----------------------------------------------------------------------------------%
+%\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Firmas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ????????
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Referencias
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Referencias}
+\begin{thebibliography}{99}
+
+	\bibitem{strassen} Algoritmo de Strassen para la multiplicaci'on de matrices cuadradas:\\  {\it http://en.wikipedia.org/wiki/Strassen\_algorithm}
+
+	\bibitem{cw} Algoritmo de Coppersmith-–Winograd para la multiplicaci'on de matrices cuadradas:\\  {\it http://en.wikipedia.org/wiki/Coppersmith\%E2\%80\%93Winograd\_algorithm}
+
+	\bibitem{binpow} Golub \& Van Loan, {\it Matrix Computations}; secci'on 11.2.5, p'agina 569.
+
+\end{thebibliography}
+
+
+
+\end{document}
+%%%
+% EOF
+%%%%%%%%%%%%%%%%%%%%%
