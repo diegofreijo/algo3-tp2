@@ -14,7 +14,7 @@ public abstract class Parser
 	
 	public static ArrayList<Instancia> LeerInstancias()
 	{
-		String ruta = ruta_proyecto + fs + "in" + fs + "Tp1Ej1.in";
+		String ruta = ruta_proyecto + fs + "in" + fs + "Tp2Ej1.in";
 		ArrayList<Instancia> ret = new ArrayList<Instancia>();
 		ArrayList<Long> linea;
 				
@@ -45,7 +45,36 @@ public abstract class Parser
 	    } 
 	    catch (IOException e)
 	    {
-	    	System.out.println("Error leyendo el archivo de entrada: ");
+	    	System.out.println("Error leyendo el archivo de imagenes: ");
+	    	e.printStackTrace();
+	    }
+	    
+	    return ret;
+	}
+	
+	public static ArrayList<Punto> LeerConsultas()
+	{
+		String ruta = ruta_proyecto + fs + "in" + fs + "Tp2Ej4.in";
+		ArrayList<Punto> ret = new ArrayList<Punto>();
+		ArrayList<Long> linea;
+		
+		long k;
+		
+	    try
+	    {
+	        BufferedReader in = new BufferedReader(new FileReader(ruta));
+	        
+	        for(k = Long.valueOf(in.readLine().trim()); k > 0; --k)
+	        {
+	        	linea = LeerLinea(in.readLine().trim());
+		        ret.add(new Punto(linea.get(0),linea.get(1)));
+	        }
+	        
+	        in.close();
+	    } 
+	    catch (IOException e)
+	    {
+	    	System.out.println("Error leyendo el archivo de consultas: ");
 	    	e.printStackTrace();
 	    }
 	    
@@ -76,27 +105,7 @@ public abstract class Parser
 		return valores;
 	}
 	
-	
-	public static void AgregarValor(Integer valor, Boolean agregar)
-	{
-		String ruta = ruta_proyecto + fs + "out" + fs + "Tp2Ej4.out";
-		
-		try
-		{
-			BufferedWriter out = new BufferedWriter(new FileWriter(ruta, agregar));
-			out.append(valor.toString() + "\n");
-	        out.close();
-		}
-		catch (IOException e)
-		{
-	    	System.out.println("Error agregando valor al archivo de salida: ");
-	    	e.printStackTrace();
-		}
-		
-	}
-	
-
-	public static void EscribirResultado(Instancia instancia, Boolean agregar)
+	public static void EscribirInstancia(Instancia instancia, Boolean agregar)
 	{
 		String ruta = ruta_proyecto + fs + "out" + fs + "Tp2Ej4.out";
 		

@@ -2,8 +2,7 @@ package boobleart;
 
 public class Intervalo
 {
-	public int inicio;
-	public int fin;
+	public long inicio,fin;
 		
 	public Intervalo(long inicio, long fin)
 	{
