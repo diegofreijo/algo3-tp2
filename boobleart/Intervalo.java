@@ -2,14 +2,18 @@ package boobleart;
 
 public class Intervalo
 {
-	public long inicio,fin;
+	public Integer inicio,fin;
 		
-	public Intervalo(long inicio, long fin)
+	public Intervalo(Integer inicio, Integer fin)
 	{
 		this.inicio = inicio;
 		this.fin = fin;
 	}
 	
+	public Intervalo()
+    {
+    }
+
 	public String toString()
 	{
 		return String.valueOf(inicio) + " " + String.valueOf(fin);
