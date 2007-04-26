@@ -8,27 +8,10 @@ import boobleart.Intervalo;
 
 public class IntervalTree
 {
-
-	private class Nodos
-    {
-		public List<Nodo> nodos = new ArrayList<Nodo>();
-    }
-
 	public Map<Integer,Nodo> arbol = new TreeMap<Integer,Nodo>();
 	
 	public IntervalTree(List<Intervalo> intervalos)
-	{
-		/*Rango rango = BuscoRango(intervalos);
-		
-		Integer pivot = rango.fin - rango.inicio;
-		pivot = pivot/2;
-		
-		Listas listas = ArmoListas(pivot,intervalos);
-		
-		Nodo nodo = new Nodo(pivot,listas.centro);
-		
-		arbol.put(pivot, nodo);*/
-		
+	{		
 		Nodos nodos = ArmarNodos(intervalos);
 		
 		int i = 0;
@@ -82,20 +65,6 @@ public class IntervalTree
 		ret.nodos.add(nodo);
 		
 	    return null;
-    }
-	
-	private class Listas
-    {
-		public List<Intervalo> izquierda;
-		public List<Intervalo> derecha;
-		public List<Intervalo> centro;
-		
-		public Listas(List<Intervalo> izq,List<Intervalo> der,List<Intervalo> cen)
-		{
-			izquierda = izq;
-			derecha = der;
-			centro = cen;
-		}
     }
 
 	private boolean Posterior(long pivot, Intervalo actual)
@@ -157,4 +126,24 @@ public class IntervalTree
 		
 		public Rango(){}
 	}
+	
+	private class Listas
+    {
+		public List<Intervalo> izquierda;
+		public List<Intervalo> derecha;
+		public List<Intervalo> centro;
+		
+		public Listas(List<Intervalo> izq,List<Intervalo> der,List<Intervalo> cen)
+		{
+			izquierda = izq;
+			derecha = der;
+			centro = cen;
+		}
+    }
+	
+	private class Nodos
+    {
+		public List<Nodo> nodos = new ArrayList<Nodo>();
+    }
+	
 }
