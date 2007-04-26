@@ -7,11 +7,11 @@ import boobleart.Intervalo;
 
 public class Nodo
 {
-	public long pivot;
+	public int pivot;
 	public List<Intervalo> inicio;
 	public List<Intervalo> fin;
 	
-	public Nodo(long pivot, List<Intervalo> intervalos)
+	public Nodo(int pivot, List<Intervalo> intervalos)
 	{
 		this.pivot = pivot;
 		this.inicio = OrdenarX(intervalos);
