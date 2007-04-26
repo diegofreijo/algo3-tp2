@@ -9,11 +9,16 @@ import boobleart.Intervalo;
 public class IntervalTree
 {
 
+	private class Nodos
+    {
+		public List<Nodo> nodos = new ArrayList<Nodo>();
+    }
+
 	public Map<Integer,Nodo> arbol = new TreeMap<Integer,Nodo>();
 	
 	public IntervalTree(List<Intervalo> intervalos)
 	{
-		Rango rango = BuscoRango(intervalos);
+		/*Rango rango = BuscoRango(intervalos);
 		
 		Integer pivot = rango.fin - rango.inicio;
 		pivot = pivot/2;
@@ -22,22 +27,33 @@ public class IntervalTree
 		
 		Nodo nodo = new Nodo(pivot,listas.centro);
 		
-		arbol.put(pivot, nodo);
+		arbol.put(pivot, nodo);*/
 		
+		Nodos nodos = ArmarNodos(intervalos);
 		
+		int i = 0;
 		
+		while(i < nodos.nodos.size()){
+			
+			arbol.put(nodos.nodos.get(i).pivot, nodos.nodos.get(i));
+		}
 	}
 
-	private Listas ArmoListas(long pivot, List<Intervalo> intervalos)
+	private Nodos ArmarNodos(List<Intervalo> intervalos)
     {
-	    int i = 1;
-	    
 	    List<Intervalo> izquierda = new ArrayList<Intervalo>();
 	    List<Intervalo> derecha= new ArrayList<Intervalo>();
 	    List<Intervalo> centro= new ArrayList<Intervalo>();
 	    
-	    while(i < intervalos.size()){
-	    	
+	    Rango rango = BuscoRango(intervalos);
+	    
+	    Integer pivot = rango.fin - rango.inicio;
+		pivot = pivot/2;
+	    
+		int i = 0;
+		
+		while(i < intervalos.size()){
+			    	
 	    	Intervalo actual = intervalos.get(i);
 	    	
 	    	if(Contiene(pivot,actual)){
@@ -52,12 +68,20 @@ public class IntervalTree
 	    		derecha.add(actual);
 	    	}
 	    	
-	    }
+		}
+			    
+		Listas listas = new Listas(izquierda,derecha,centro);
+	
+		Nodos ret = new Nodos();
+		
+		Nodo nodo = new Nodo(pivot,listas.centro); 
 	    
-	    Listas ret = new Listas(izquierda,derecha,centro);
-	    
-	    return ret;
-	    
+		ret.nodos.addAll(ArmarNodos(listas.izquierda).nodos);
+		ret.nodos.addAll(ArmarNodos(listas.izquierda).nodos);
+		
+		ret.nodos.add(nodo);
+		
+	    return null;
     }
 	
 	private class Listas
