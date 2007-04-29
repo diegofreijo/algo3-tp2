@@ -8,10 +8,10 @@ def randomSinCero(a):
 	return ret
 
 def rango(x):
-    a = randomSinCero(x)
-    b = randomSinCero(x)
+    a = random.randrange(x)
+    b = random.randrange(x)
     while b < a:
-        b = randomSinCero(x)
+        b = random.randrange(x)
     return str(a) + " " + str(b)
 
 
