@@ -70,19 +70,30 @@ public class IntervalTree
 	private boolean Posterior(long pivot, Intervalo actual)
     {
 	    // TODO Auto-generated method stub
-	    return false;
+		
+		if(actual.inicio > pivot){
+			return true;
+		} else {
+			return false;
+		}
     }
 
 	private boolean Anterior(long pivot, Intervalo actual)
     {
-	    // TODO Auto-generated method stub
-	    return false;
+		if(actual.fin < pivot){
+			return true;
+		} else {
+			return false;
+		}
     }
 
-	private boolean Contiene(long pivot, Intervalo intervalo)
+	private boolean Contiene(long pivot, Intervalo actual)
     {
-	    // TODO Auto-generated method stub
-	    return false;
+	    if(pivot <= actual.fin && pivot >= actual.inicio){
+	    	return true;
+		} else {
+			return false;
+		}
     }
 	
 	private Rango BuscoRango(List<Intervalo>intervalos){
