@@ -16,7 +16,7 @@ public abstract class Parser
 	{
 		String ruta = ruta_proyecto + fs + "in" + fs + "Tp2Ej1.in";
 		ArrayList<Instancia> ret = new ArrayList<Instancia>();
-		ArrayList<Long> linea;
+		ArrayList<Integer> linea;
 				
 		Instancia instancia;
 		Imagen imagen;
@@ -56,7 +56,7 @@ public abstract class Parser
 	{
 		String ruta = ruta_proyecto + fs + "in" + fs + "Tp2Ej4.in";
 		ArrayList<Punto> ret = new ArrayList<Punto>();
-		ArrayList<Long> linea;
+		ArrayList<Integer> linea;
 		
 		long k;
 		
@@ -81,9 +81,9 @@ public abstract class Parser
 	    return ret;
 	}
 
-	private static ArrayList<Long> LeerLinea(String linea)
+	private static ArrayList<Integer> LeerLinea(String linea)
 	{
-		ArrayList<Long> valores = new ArrayList<Long>();
+		ArrayList<Integer> valores = new ArrayList<Integer>();
 		char[] ca = linea.toCharArray();
 		String actual = "";
 		
@@ -97,7 +97,7 @@ public abstract class Parser
 					++i;
 				}
 				while((i < ca.length) && (ca[i] != ' '));
-				valores.add(Long.valueOf(actual));
+				valores.add(Integer.valueOf(actual));
 				actual = "";
 			}
 		}
