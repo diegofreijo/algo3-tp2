@@ -8,7 +8,7 @@ import boobleart.Intervalo;
 
 public class IntervalTree
 {
-	public Map<Integer,Nodo> arbol = new TreeMap<Integer,Nodo>();
+	private Map<Integer,Nodo> arbol = new TreeMap<Integer,Nodo>();
 	
 	public IntervalTree(List<Intervalo> intervalos)
 	{		
@@ -68,9 +68,7 @@ public class IntervalTree
     }
 
 	private boolean Posterior(long pivot, Intervalo actual)
-    {
-	    // TODO Auto-generated method stub
-		
+    {		
 		if(actual.inicio > pivot){
 			return true;
 		} else {
