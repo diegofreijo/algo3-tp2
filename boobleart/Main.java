@@ -20,10 +20,14 @@ public class Main
 		{
 			System.out.println(p.toString());
 		}
+		
+		
+		
 	}
 	
 	public ArrayList<Imagen> BuscarInterseccion(Punto p)
 	{
+		
 		return null;
 	}
 }

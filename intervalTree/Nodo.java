@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import boobleart.Intervalo;
 
-
 public class Nodo
 {
 	public int pivot;
