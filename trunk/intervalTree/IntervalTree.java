@@ -142,7 +142,7 @@ public class IntervalTree
 		public List<Intervalo> derecha;
 		public List<Intervalo> centro;
 		
-		public Listas(List<Intervalo> izq,List<Intervalo> der,List<Intervalo> cen)
+		public Listas(List<Intervalo> izq, List<Intervalo> der, List<Intervalo> cen)
 		{
 			izquierda = izq;
 			derecha = der;
@@ -154,5 +154,4 @@ public class IntervalTree
     {
 		public List<Nodo> nodos = new ArrayList<Nodo>();
     }
-	
 }
