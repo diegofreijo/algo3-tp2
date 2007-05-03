@@ -1,33 +1,40 @@
 package boobleart;
 
+import intervalTree.IntervalTree;
 import java.util.ArrayList;
 
 public class Main
 {
 	public static void main(String[] args)
 	{
+		// Leo los datos de entrada
 		ArrayList<Instancia> instancias = Parser.LeerInstancias();
 		ArrayList<Punto> consultas = Parser.LeerConsultas();
 		
-		System.out.println("Instancias:");
-		for(Instancia i: instancias)
+		// Genero los arboles
+		IntervalTree arbol_x, arbol_y;
+		ArrayList<Intervalo> intervalos_x, intervalos_y;
+		
+		for(Instancia instancia: instancias)
 		{
-			System.out.println(i.toString());
+			intervalos_x = new ArrayList<Intervalo>();
+			intervalos_y = new ArrayList<Intervalo>();
+			
+			for(Imagen img: instancia.imagenes)
+			{
+				intervalos_x.add(img.x);
+				intervalos_y.add(img.y);
+			}
+			
+			arbol_x = new IntervalTree(intervalos_x);
+			arbol_y = new IntervalTree(intervalos_y);
 		}
-	
-		System.out.println("Consultas:");
+		
+		// Realizo las consultas
 		for(Punto p: consultas)
 		{
-			System.out.println(p.toString());
+			// TODO: realizo las consultas sobre los arboles
 		}
 		
-		
-		
-	}
-	
-	public ArrayList<Imagen> BuscarInterseccion(Punto p)
-	{
-		
-		return null;
 	}
 }
