@@ -26,8 +26,13 @@ public class Main
 				intervalos_y.add(img.y);
 			}
 			
+			//System.out.println("===============");
+			//System.out.println(intervalos_x);
 			arbol_x = new IntervalTree(intervalos_x);
-			arbol_y = new IntervalTree(intervalos_y);
+			
+			//arbol_y = new IntervalTree(intervalos_y);
+			
+			
 		}
 		
 		// Realizo las consultas

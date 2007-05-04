@@ -19,6 +19,7 @@ public class IntervalTree
 		while(i < nodos.nodos.size()){
 			
 			arbol.put(nodos.nodos.get(i).pivot, nodos.nodos.get(i));
+			i++;
 		}
 	}
 
@@ -50,7 +51,7 @@ public class IntervalTree
 	    	if(Posterior(pivot,actual)){
 	    		derecha.add(actual);
 	    	}
-	    	
+	    	i++;
 		}
 			    
 		Listas listas = new Listas(izquierda,derecha,centro);
@@ -59,12 +60,16 @@ public class IntervalTree
 		
 		Nodo nodo = new Nodo(pivot,listas.centro); 
 	    
-		ret.nodos.addAll(ArmarNodos(listas.izquierda).nodos);
-		ret.nodos.addAll(ArmarNodos(listas.izquierda).nodos);
+		if(listas.izquierda.size() > 0){
+			ret.nodos.addAll(ArmarNodos(listas.izquierda).nodos);
+		}
+		if(listas.derecha.size() > 0){
+			ret.nodos.addAll(ArmarNodos(listas.derecha).nodos);
+		}
 		
 		ret.nodos.add(nodo);
 		
-	    return null;
+	    return ret;
     }
 
 	private boolean Posterior(long pivot, Intervalo actual)
