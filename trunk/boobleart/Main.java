@@ -2,6 +2,7 @@ package boobleart;
 
 import intervalTree.IntervalTree;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main
 {
@@ -30,8 +31,17 @@ public class Main
 			arbol_x = new IntervalTree(intervalos_x);
 			arbol_y = new IntervalTree(intervalos_y);
 			
+			//--- prueba de busqueda
+			List<Intervalo> lista2= new ArrayList<Intervalo>();
+			lista2 = arbol_x.BuscarInterseccion(4);
 			
+			for(Intervalo interv: lista2)
+			{
+				System.out.println(interv.toString());
+			}
+			//-------
 		}
+		
 		
 		// Realizo las consultas
 		for(Punto p: consultas)
