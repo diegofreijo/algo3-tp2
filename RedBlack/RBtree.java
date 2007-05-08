@@ -1,32 +1,18 @@
-/*
-La idea es tener tres "punteros"(en Java creo que son referencias): uno al padre, izquierda y derecha del arbol,
-un nodo que contenga el color, la clave y el valor asociado a la misma.
-Y ademas tenemos la variable tamanio para saber el tamaño del mismo.
-
-Todos los nodos poseen informacion, las hojas del arbol son nodos con informacion
-tal que sus dos hijos son null y por lo tanto pueden ser tanto rojos como negros.
-
-La funcion insertar toma como parametros la clave y el valor asociado a ls misma.
-*/
-
 package RedBlack;
+
+import intervalTree.*;
 
 public class RBtree{
 
- private int tamanio;
- private Nodo2 nodo;
- private RBtree left;
- private RBtree right;
- private RBtree padre;
+	private int tamanio;
+	private Nodo2 root;
 
-private static final boolean ROJO = true;
-private static final boolean NEGRO = false;
+ 	private static final int ROJO = 0;
+ 	private static final int NEGRO = 1;
 
 	public RBtree(){
 		tamanio = 0;
-		left = right = padre = null;
-		Nodo2 nodo = new Nodo2();
-		this.nodo = nodo;
+		this.root = null;
 	}
 
 	public boolean vacio(){
@@ -34,183 +20,234 @@ private static final boolean NEGRO = false;
 	}
 
 	public Nodo2 raiz(){
-		return (this.nodo);
-	}
-	
-	public RBtree izquierda(){
-		return (this.left);
-	}
-	
-	public RBtree derecha(){
-		return (this.right);
-	}
-	
-	public RBtree padre(){
-		return this.padre;
-	}
-	
-	public RBtree abuelo(){
-    		return this.padre.padre;
-	}
-	
-	public RBtree tio(){
-		if (this.padre == this.abuelo().left)
-		        return this.abuelo().right;
-		else
-       			return this.abuelo().left;
+		return (this.root);
 	}
 
-	public void insertar(Integer k, Object valor){
-	RBtree elem = new RBtree();
-	elem.nodo.construir(k,valor); 
+	public Nodo2 izquierda(){
+		return (this.root.izq());
+	}
 
-	RBtree y = null;
-	RBtree x = new RBtree();
-	x.copia(this);
-	
-		while (x.tamanio != 0){ 
+	public Nodo2 derecha(){
+		return (this.root.der());
+	}
+/*
+	public Nodo2 padre(){
+		return this.root.padre();
+	}
+
+	*/
+
+	public void insertar(int k, Nodo valor){
+	Nodo2 elem = new Nodo2();
+	elem.construir(k,valor);
+
+	Nodo2 y = null;
+	Nodo2 x = this.root;
+	//RBtree x = new RBtree();
+	//x.copia(this);
+
+		while (x != null) {
 			y = x;
-			if (k < x.nodo.key){
-				x = x.left;
+			if (k < x.key){
+				x = x.izq;
 			}
 			else{
-				x = x.right;
+				x = x.der;
 			}
 		}
+
 	elem.padre = y;
 
-	if ( y == null) {		
-		this.nodo = elem.nodo;
+	if ( y == null) {
+		this.root = elem;
 	}
-	else if (k < y.nodo.key) {
-			y.left = elem;
+	else if (k < y.key) {
+			y.izq = elem;
 		}
 		else {
-			y.right = elem;
+			y.der = elem;
 		}
 	this.tamanio++;
 	arreglarInv(elem);
 	}
-
+/*
 	public void copia(RBtree rb){
 
 		this.padre = rb.padre;
-		if (rb.right != null) 
+		if (rb.right != null)
 			this.right.copia(rb.right);
-		else 
+		else
 			this.right = null;
-		
-		if (rb.left != null) 
+
+		if (rb.left != null)
 			this.left.copia(rb.left);
 		else
 			this.left= null;
-		
+
 		this.nodo.copia(rb.nodo);
 		this.tamanio = rb.tamanio;
 	}
-	
-private  static void arreglarInv(RBtree elem){
-	insert_case1(elem);
-}
+*/
+	private void arreglarInv(Nodo2 elem){
+		insert_case1(elem);
+	}
 
-private static void insert_case1(RBtree elem) {
-    if (elem.padre == null)
-        elem.nodo.color = NEGRO;
-    else
-        insert_case2(elem);
-}
+	private void insert_case1(Nodo2 elem) {
+	    if (elem.padre == null){
+	        elem.color = NEGRO;
+	        System.out.println("Case1");
+		}
+	    else{
+	        insert_case2(elem);
+		}
+	}
 
-private static void insert_case2(RBtree elem) {
-    if (elem.padre.nodo.color == NEGRO)
-        return; // aca NO se rompe el invariante.
-    else
-        insert_case3(elem);
-}
+	private void insert_case2(Nodo2 elem) {
+	    if (elem.padre().color == NEGRO){
+	    System.out.println("Case2");
+	        return; // aca NO se rompe el invariante.
+		}
+	    else{
+	        insert_case3(elem);
+		}
+	}
 
-private static void insert_case3(RBtree elem) {
-if (elem.tio() != null){
-    if (elem.tio().nodo.color == ROJO) {
-        elem.padre.nodo.color = NEGRO;
-        elem.tio().nodo.color = NEGRO;
-        elem.abuelo().nodo.color = ROJO;
-        insert_case1(elem.abuelo());
-    }
-    else
-        insert_case4(elem);
-    }
-}
-	
-private static void insert_case4(RBtree elem) {
-    if (elem == elem.padre.right && elem.padre == elem.abuelo().left) {
-        rotarIzq(elem.padre);
-        elem = elem.left;
-    } else if (elem == elem.padre.left && elem.padre == elem.abuelo().right) {
-        rotarDer(elem.padre);
-        elem = elem.right;
-    }
-    insert_case5(elem);
-}
+	private void insert_case3(Nodo2 elem) {
+		if (elem.tio() != null){
+		    if (elem.tio().color == ROJO) {
+		        elem.padre().color = NEGRO;
+		        elem.tio().color = NEGRO;
+		        elem.abuelo().color = ROJO;
+		        insert_case1(elem.abuelo());
+		        System.out.println("Case3");
+		    }
+		    else {
+				insert_case4(elem);
+			}
+		}
+		else{
+		     insert_case4(elem);
+		}
+	}
 
-private static void insert_case5(RBtree elem) {
-    elem.padre.nodo.color = NEGRO;
-    elem.abuelo().nodo.color = ROJO;
-    if (elem == elem.padre.left && elem.padre == elem.abuelo().left) {
-        rotarDer(elem.abuelo());
-    } else {
-        // Aca, elem es hijo derecho && el padre de elem tambien es hijo derecho. */
-        rotarIzq(elem.abuelo());
-    }
-}
+	private void insert_case4(Nodo2 elem) {
+	    if (elem == elem.padre.der && elem.padre == elem.abuelo().izq) {
+	        this.rotarIzq(elem.padre);
+	        elem = elem.izq;
+	        System.out.println("Case4");
+	    } else if (elem == elem.padre.izq && elem.padre == elem.abuelo().der) {
+	        this.rotarDer(elem.padre);
+	        elem = elem.der;
+	        System.out.println("Case4");
+	    }
+	    insert_case5(elem);
+	}
+
+	private void insert_case5(Nodo2 elem) {
+	    elem.padre.color = NEGRO;
+	    elem.abuelo().color = ROJO;
+	    System.out.println("Case5");
+	    if (elem == elem.padre.izq && elem.padre == elem.abuelo().izq) {
+			System.out.println("rotarDer");
+	        this.rotarDer(elem.abuelo());
+	    } else {
+	        // Aca, elem es hijo derecho && el padre de elem tambien es hijo derecho. */
+	        System.out.println("rotarIzq");
+	        this.rotarIzq(elem.abuelo());
+	    }
+	}
 
 
 // Rotaciones a la izquierda y a la derecha
 
-private static void rotarIzq(RBtree elem){
-	RBtree y = elem.right;
-	elem.right = y.left;
-	y.left.padre = elem;
-	y.padre = elem.padre;
-	if (elem.padre != null){
-		if (elem == elem.padre.left)
-			elem.padre.left = y;
-		else
-			elem.padre.right = y;
+	private void rotarIzq(Nodo2 elem){
+		Nodo2 y = elem.der;
+		elem.der = y.izq;
+		if (y.izq !=null)
+		y.izq.padre = elem;
+		y.padre = elem.padre;
+		if (elem.padre != null){
+			if (elem == elem.padre.izq)
+				elem.padre.izq = y;
+			else
+				elem.padre.der = y;
+		}
+		else{
+			this.root = y;
+		}
+		y.izq = elem;
+		elem.padre = y;
+		System.out.println("FIn rotarIzq");
 	}
-	y.left = elem;
-	elem.padre = y;
-}
 
 
-private static void rotarDer(RBtree elem){
-	RBtree x = elem.left;
-	elem.left = x.right;
-	x.right.padre = elem;
-	x.padre = elem.padre;
-	if (elem.padre != null){
-		if (elem == elem.padre.left)
-			elem.padre.left = x;
-		else
-			elem.padre.right = x;
+	private void rotarDer(Nodo2 elem){
+		Nodo2 x = elem.izq;
+		elem.izq = x.der;
+		if (x.der != null)
+		x.der.padre = elem;
+		x.padre = elem.padre;
+		if (elem.padre != null){
+			if (elem == elem.padre.izq)
+				elem.padre.izq = x;
+			else
+				elem.padre.der = x;
+		}
+		else{
+			this.root = x;
+		}
+		x.der = elem;
+		elem.padre = x;
+		System.out.println("rotarDer");
 	}
-	x.right = elem;
-	elem.padre = x;
-}
 
-public class Nodo2{
-	private Boolean color;
-	public Integer key;
-	public Object valor; // algunos usan Comparable en lugar de Object.
-			
-	public void construir(Integer  k, Object val){
-		this.key = k;
-		this.valor = val;
-		this.color = true;
+public static void main(String[] args)
+	{
+
+		// Leo los datos de entrada
+		/*
+		ArrayList<int> instancias = Parser.LeerInstancias();
+		ArrayList<Punto> consultas = Parser.LeerConsultas();
+		*/
+		// Genero los arboles
+
+
+		RBtree rb = new RBtree();
+			/*
+		Integer valor = new Integer(33);
+    	Integer valor1 = new Integer(44);
+		Integer valor2 = new Integer(55);
+		Integer valor3 = new Integer(66);
+		int c1 = 33;
+		int c2 = 44;
+		int c3 = 55;
+		int c4 = 66;
+		rb.insertar(c1,valor);
+		rb.insertar(c2,valor1);
+		rb.insertar(c3,valor2);
+		rb.insertar(c4,valor3);
+*/
+
+			//System.out.println("===============");
+			System.out.println(rb.raiz().izq.key);
+			System.out.println(rb.raiz().izq.valor);
+			System.out.println(rb.raiz().izq.color);
+			System.out.println(rb.raiz().key);
+			System.out.println(rb.raiz().valor);
+			System.out.println(rb.raiz().color);
+			System.out.println(rb.derecha().key);
+			System.out.println(rb.derecha().valor);
+			System.out.println(rb.derecha().color);
+			System.out.println(rb.derecha().der().key);
+			System.out.println(rb.derecha().der().valor);
+			System.out.println(rb.derecha().der().color);
+			/*
+			System.out.println(rb.derecha().der().der().key);
+			System.out.println(rb.derecha().der().der().valor);
+			System.out.println(rb.derecha().der().der().color);
+			*/
+			//arbol_y = new IntervalTree(intervalos_y);
+
 	}
-	public void copia(Nodo2 n){
-		this.key = n.key;
-		this.valor = n.valor;
-		this.color = n.color;
-	}
-	
-}
+
 }

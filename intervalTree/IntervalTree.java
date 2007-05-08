@@ -2,13 +2,13 @@ package intervalTree;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import boobleart.Intervalo;
+import RedBlack.*;
+//import RedBlack.Nodo2;
 
 public class IntervalTree
 {
-	private Map<Integer,Nodo> arbol = new TreeMap<Integer,Nodo>();
+	private RBtree arbol = new RBtree();
 	
 	public IntervalTree(List<Intervalo> intervalos)
 	{		
@@ -17,9 +17,9 @@ public class IntervalTree
 		int i = 0;
 		
 		while(i < nodos.nodos.size()){
-			
+		
 			//System.out.println(i);
-			arbol.put(nodos.nodos.get(i).pivot, nodos.nodos.get(i));
+			arbol.insertar(nodos.nodos.get(i).pivot, nodos.nodos.get(i));
 			i++;
 		}
 	}
@@ -131,6 +131,82 @@ public class IntervalTree
 		ret.fin = mayorFin;
 		
 		return ret;
+	}
+	
+	public List<Intervalo> Buscar(int valorBusq){
+
+		boolean salir = false;
+		List<Intervalo> interv = new ArrayList<Intervalo>();;
+		
+		//RBtree arbolAux = new RBtree();
+		Nodo2 nodoAux = new Nodo2();
+		
+		nodoAux = arbol.raiz();
+		
+		while( !salir ){
+			if(nodoAux.key < valorBusq){
+				//si la clave es menor agrego a la solucion los intervalos que terminan 
+				//despues que 'valorBusq' y voy para la derecha.
+				
+				interv.addAll(dameTermDespues(nodoAux.valor, valorBusq));
+				
+				if( nodoAux.der() != null ){
+					nodoAux = nodoAux.der();
+				}else{
+					salir=true;
+				}
+				
+			}else if(nodoAux.key > valorBusq){
+				//si la clave es mayor agrego a la solucion los intervalos que empiezan 
+				//antes que 'valorBusq' y voy para la izquierda.
+				
+				interv.addAll(dameEmpAntes(nodoAux.valor, valorBusq));
+				
+				if( nodoAux.izq() != null ){
+					nodoAux = nodoAux.izq();
+				}else{
+					salir=true;
+				}
+				
+			}else{ 
+				//si es igual al valor de la raiz agrego todos los intervalos a la solucion
+				interv.addAll(nodoAux.valor.inicio);
+				salir=true; //nose si esta bien esto 
+			}
+		}
+		return interv;
+	}
+	
+	//private List<Intervalo> dameTermDespues(List<Intervalo>intervalos, int valor){
+	private List<Intervalo> dameTermDespues(Nodo nodo, int valor){
+		List<Intervalo> intervSol = new ArrayList<Intervalo>();
+		List<Intervalo> intervalos = new ArrayList<Intervalo>();
+		intervalos = nodo.fin;
+		
+		int i = 0;
+		
+		while(i < intervalos.size() && (intervalos.get(i).fin) > valor){
+			
+			intervSol.add(intervalos.get(i));
+			i++;			
+		}
+		return intervSol;
+	}
+	
+	//private List<Intervalo> dameEmpAntes(List<Intervalo>intervalos, int valor){
+	private List<Intervalo> dameEmpAntes(Nodo nodo, int valor){
+		List<Intervalo> intervSol = new ArrayList<Intervalo>();
+		List<Intervalo> intervalos = new ArrayList<Intervalo>();
+		intervalos = nodo.inicio;
+		
+		int i = 0;
+		
+		while(i < intervalos.size() && (intervalos.get(i).inicio) < valor){
+			
+			intervSol.add(intervalos.get(i));
+			i++;			
+		}
+		return intervSol;
 	}
 	
 	private class Rango
