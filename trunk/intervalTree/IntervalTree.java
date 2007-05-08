@@ -5,7 +5,8 @@ import java.util.List;
 import boobleart.Instancia;
 import boobleart.Intervalo;
 import RedBlack.*;
-//import RedBlack.Nodo2;
+
+
 
 public class IntervalTree
 {
@@ -34,8 +35,8 @@ public class IntervalTree
 	    
 	    Rango rango = BuscoRango(intervalos);
 	    
-	    Integer pivot = rango.fin/2;
-		pivot = rango.inicio + pivot;
+	    Integer pivot = rango.fin - rango.inicio;
+		pivot = rango.inicio + pivot/2;
 	    
 		//System.out.println(pivot);
 		
@@ -256,9 +257,8 @@ public class IntervalTree
 		public List<Nodo> nodos = new ArrayList<Nodo>();
     }
 	
-	public static void main(String[] args)
+	public static void main()
 	{
-
 		List<Intervalo> lista = new ArrayList<Intervalo>();
 		List<Intervalo> lista2= new ArrayList<Intervalo>();
 		
@@ -266,13 +266,13 @@ public class IntervalTree
 		Intervalo int2 = new Intervalo(1,6);
 		//Intervalo int3 = new Intervalo(3,6);
 		//Intervalo int4 = new Intervalo(1,5);
-		//Intervalo int5 = new Intervalo(8,10);
+		Intervalo int5 = new Intervalo(8,10);
 		
-		lista.add(int1);
-		lista.add(int2);
+		//lista.add(int1);
+		//lista.add(int2);
 		//lista.add(int3);
 		//lista.add(int4);
-		//lista.add(int5);
+		lista.add(int5);
 		
 		IntervalTree RBinterv = new IntervalTree(lista);
 				
