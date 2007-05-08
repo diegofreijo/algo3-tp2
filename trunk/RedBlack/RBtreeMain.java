@@ -17,6 +17,7 @@ public class RBtreeMain
 		
 		
 		RBtree rb = new RBtree();
+		/*
 		int valor = 33;
     	int valor1 = 44;
 		int valor2 = 55;
@@ -24,7 +25,7 @@ public class RBtreeMain
 		rb.insertar(4,valor1);
 		rb.insertar(5,valor2);
 		
-				
+		*/	/*	
 			//System.out.println("===============");
 			System.out.println(rb.raiz().key);
 			System.out.println(rb.raiz().valor);
@@ -33,6 +34,6 @@ public class RBtreeMain
 			System.out.println(rb.derecha().derecha().raiz().key);
 			System.out.println(rb.derecha().derecha().raiz().valor);
 			//arbol_y = new IntervalTree(intervalos_y);
-			
+			*/
 	}
 }
