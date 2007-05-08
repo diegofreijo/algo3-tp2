@@ -2,6 +2,7 @@ package intervalTree;
 
 import java.util.ArrayList;
 import java.util.List;
+import boobleart.Instancia;
 import boobleart.Intervalo;
 import RedBlack.*;
 //import RedBlack.Nodo2;
@@ -9,6 +10,7 @@ import RedBlack.*;
 public class IntervalTree
 {
 	private RBtree arbol = new RBtree();
+	//public RBtree arbol = new RBtree();
 	
 	public IntervalTree(List<Intervalo> intervalos)
 	{		
@@ -133,7 +135,7 @@ public class IntervalTree
 		return ret;
 	}
 	
-	public List<Intervalo> Buscar(int valorBusq){
+	public List<Intervalo> BuscarInterseccion(int valorBusq){
 
 		boolean salir = false;
 		List<Intervalo> interv = new ArrayList<Intervalo>();;
@@ -148,6 +150,8 @@ public class IntervalTree
 				//si la clave es menor agrego a la solucion los intervalos que terminan 
 				//despues que 'valorBusq' y voy para la derecha.
 				
+				System.out.println("1: "+nodoAux.key);
+				
 				interv.addAll(dameTermDespues(nodoAux.valor, valorBusq));
 				
 				if( nodoAux.der() != null ){
@@ -160,18 +164,30 @@ public class IntervalTree
 				//si la clave es mayor agrego a la solucion los intervalos que empiezan 
 				//antes que 'valorBusq' y voy para la izquierda.
 				
+				System.out.println("2: "+nodoAux.key);
+				
 				interv.addAll(dameEmpAntes(nodoAux.valor, valorBusq));
 				
 				if( nodoAux.izq() != null ){
+					System.out.println("2b");
 					nodoAux = nodoAux.izq();
 				}else{
+					System.out.println("2b");
 					salir=true;
 				}
 				
 			}else{ 
 				//si es igual al valor de la raiz agrego todos los intervalos a la solucion
 				interv.addAll(nodoAux.valor.inicio);
-				salir=true; //nose si esta bien esto 
+				
+				System.out.println("3: "+nodoAux.key);
+				
+				//salir=true; //nose si esta bien esto
+				if( nodoAux.der() != null ){
+					nodoAux = nodoAux.der();
+				}else{
+					salir=true;
+				}
 			}
 		}
 		return interv;
@@ -185,7 +201,7 @@ public class IntervalTree
 		
 		int i = 0;
 		
-		while(i < intervalos.size() && (intervalos.get(i).fin) > valor){
+		while(i < intervalos.size() && (intervalos.get(i).fin) >= valor){
 			
 			intervSol.add(intervalos.get(i));
 			i++;			
@@ -201,7 +217,7 @@ public class IntervalTree
 		
 		int i = 0;
 		
-		while(i < intervalos.size() && (intervalos.get(i).inicio) < valor){
+		while(i < intervalos.size() && (intervalos.get(i).inicio) <= valor){
 			
 			intervSol.add(intervalos.get(i));
 			i++;			
@@ -239,4 +255,39 @@ public class IntervalTree
     {
 		public List<Nodo> nodos = new ArrayList<Nodo>();
     }
+	
+	public static void main(String[] args)
+	{
+
+		List<Intervalo> lista = new ArrayList<Intervalo>();
+		List<Intervalo> lista2= new ArrayList<Intervalo>();
+		
+		Intervalo int1 = new Intervalo(1,8);
+		Intervalo int2 = new Intervalo(1,6);
+		//Intervalo int3 = new Intervalo(3,6);
+		//Intervalo int4 = new Intervalo(1,5);
+		//Intervalo int5 = new Intervalo(8,10);
+		
+		lista.add(int1);
+		lista.add(int2);
+		//lista.add(int3);
+		//lista.add(int4);
+		//lista.add(int5);
+		
+		IntervalTree RBinterv = new IntervalTree(lista);
+				
+		System.out.println("key: " + RBinterv.arbol.raiz().key);
+		System.out.println("val ini: " + RBinterv.arbol.raiz().valor.inicio);
+		System.out.println("val fin: " + RBinterv.arbol.raiz().valor.fin);
+				
+		lista2 = RBinterv.BuscarInterseccion(4);
+		
+		System.out.println(lista2.toString());
+		System.out.println(RBinterv.toString());
+		
+		for(Intervalo interv: lista2)
+		{
+			System.out.println(interv.toString());
+		}
+	}
 }
