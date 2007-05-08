@@ -2,6 +2,7 @@ package boobleart;
 
 import intervalTree.IntervalTree;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main
 {
@@ -26,11 +27,9 @@ public class Main
 				intervalos_y.add(img.y);
 			}
 			
-			//System.out.println("===============");
 			//System.out.println(intervalos_x);
 			arbol_x = new IntervalTree(intervalos_x);
-			
-			//arbol_y = new IntervalTree(intervalos_y);
+			arbol_y = new IntervalTree(intervalos_y);
 			
 			
 		}
@@ -42,4 +41,5 @@ public class Main
 		}
 		
 	}
+
 }
