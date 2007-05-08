@@ -170,7 +170,7 @@ public class IntervalTree
 				interv.addAll(dameEmpAntes(nodoAux.valor, valorBusq));
 				
 				if( nodoAux.izq() != null ){
-					System.out.println("2b");
+					System.out.println("2a");
 					nodoAux = nodoAux.izq();
 				}else{
 					System.out.println("2b");
@@ -194,7 +194,6 @@ public class IntervalTree
 		return interv;
 	}
 	
-	//private List<Intervalo> dameTermDespues(List<Intervalo>intervalos, int valor){
 	private List<Intervalo> dameTermDespues(Nodo nodo, int valor){
 		List<Intervalo> intervSol = new ArrayList<Intervalo>();
 		List<Intervalo> intervalos = new ArrayList<Intervalo>();
@@ -210,18 +209,18 @@ public class IntervalTree
 		return intervSol;
 	}
 	
-	//private List<Intervalo> dameEmpAntes(List<Intervalo>intervalos, int valor){
 	private List<Intervalo> dameEmpAntes(Nodo nodo, int valor){
 		List<Intervalo> intervSol = new ArrayList<Intervalo>();
 		List<Intervalo> intervalos = new ArrayList<Intervalo>();
 		intervalos = nodo.inicio;
 		
-		int i = 0;
+		//int i = 0;
+		int i = intervalos.size()-1;
 		
-		while(i < intervalos.size() && (intervalos.get(i).inicio) <= valor){
-			
+		//while(i < intervalos.size() && (intervalos.get(i).inicio) <= valor){
+		while(i >= 0 && (intervalos.get(i).inicio) <= valor){	
 			intervSol.add(intervalos.get(i));
-			i++;			
+			i--;			
 		}
 		return intervSol;
 	}
@@ -257,22 +256,25 @@ public class IntervalTree
 		public List<Nodo> nodos = new ArrayList<Nodo>();
     }
 	
+	//public static void main(String[] args)
 	public static void main()
 	{
 		List<Intervalo> lista = new ArrayList<Intervalo>();
 		List<Intervalo> lista2= new ArrayList<Intervalo>();
 		
-		Intervalo int1 = new Intervalo(1,8);
-		Intervalo int2 = new Intervalo(1,6);
-		//Intervalo int3 = new Intervalo(3,6);
+		Intervalo int1 = new Intervalo(1,6);
+		Intervalo int2 = new Intervalo(2,8);
+		Intervalo int3 = new Intervalo(3,5);
 		//Intervalo int4 = new Intervalo(1,5);
 		Intervalo int5 = new Intervalo(8,10);
+		Intervalo int6 = new Intervalo(22,29);
 		
-		//lista.add(int1);
-		//lista.add(int2);
-		//lista.add(int3);
+		lista.add(int1);
+		lista.add(int2);
+		lista.add(int3);
 		//lista.add(int4);
 		lista.add(int5);
+		lista.add(int6);
 		
 		IntervalTree RBinterv = new IntervalTree(lista);
 				
@@ -280,7 +282,7 @@ public class IntervalTree
 		System.out.println("val ini: " + RBinterv.arbol.raiz().valor.inicio);
 		System.out.println("val fin: " + RBinterv.arbol.raiz().valor.fin);
 				
-		lista2 = RBinterv.BuscarInterseccion(4);
+		lista2 = RBinterv.BuscarInterseccion(24);
 		
 		System.out.println(lista2.toString());
 		System.out.println(RBinterv.toString());
