@@ -13,8 +13,11 @@ public class Nodo
 	public Nodo(int pivot, List<Intervalo> intervalos)
 	{
 		this.pivot = pivot;
+		
 		this.inicio = OrdenarX(intervalos);
+		
 		this.fin = OrdenarY(intervalos);
+		
 	}
 	
 	private List<Intervalo> OrdenarX(List<Intervalo> intervalos)

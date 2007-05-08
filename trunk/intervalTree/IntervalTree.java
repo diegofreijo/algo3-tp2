@@ -18,6 +18,7 @@ public class IntervalTree
 		
 		while(i < nodos.nodos.size()){
 			
+			//System.out.println(i);
 			arbol.put(nodos.nodos.get(i).pivot, nodos.nodos.get(i));
 			i++;
 		}
@@ -34,6 +35,8 @@ public class IntervalTree
 	    Integer pivot = rango.fin/2;
 		pivot = rango.inicio + pivot;
 	    
+		//System.out.println(pivot);
+		
 		int i = 0;
 		
 		while(i < intervalos.size()){
@@ -58,9 +61,10 @@ public class IntervalTree
 	
 		Nodos ret = new Nodos();
 		
-		Nodo nodo = new Nodo(pivot,listas.centro); 
-		
-		ret.nodos.add(nodo);
+		if(listas.centro.size() > 0){
+			Nodo nodo = new Nodo(pivot,listas.centro); 
+			ret.nodos.add(nodo);	
+		}
 	    
 		if(listas.izquierda.size() > 0){
 			ret.nodos.addAll(ArmarNodos(listas.izquierda).nodos);
