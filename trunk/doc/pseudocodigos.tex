@@ -1,5 +1,5 @@
 \section{Pseudoc'odigos}
-\algoritmo{Insertar(int $k$, Nodo $valor$)}
+\algoritmo{Insertar($k$, $valor$)}
 \begin{algorithmic}[1]
 \STATE $elem \leftarrow new Nodo2()$
 \STATE $elem.construir(k, valor)$
@@ -25,6 +25,7 @@
 \STATE $arreglarInv(elem)$
 \end{algorithmic}
 
+\vspace{2em}
 
 \algoritmo{BuscarInterseccion($valorBusq$)}{Devuelve la lista de intervalos que contienen al valor buscado}{O($log(n)+k$)}
 \begin{algorithmic}[1]
@@ -54,6 +55,8 @@
 \ENDWHILE
 \end{algorithmic}
 
+\vspace{2em}
+
 \algoritmo{dameTermDespues($nodo$, $valor$)}{Devuelve una lista con los intervalos del nodo que terminan despues de valor, utilizando la lista ordenada por el valor fin de mayor a menor}{O($+k$)}
 \begin{algorithmic}[1]
 \STATE $intervalos \leftarrow  nodo.fin$
@@ -64,6 +67,8 @@
 \ENDWHILE
 \end{algorithmic}
 
+\vspace{2em}
+
 \algoritmo{dameEmpAntes($nodo$, $valor$)}{Devuelve una lista con los intervalos del nodo que empiezan antes de valor, utilizando la lista ordenada por el valor inicio de mayor a menor}{O($+k$)}
 \begin{algorithmic}[1]
 \STATE $intervalos \leftarrow  nodo.inicio$
@@ -72,4 +77,25 @@
 	agregar intervalo a la solucion
  	$i--$
 \ENDWHILE
+\end{algorithmic}
+
+\vspace{2em}
+
+\algoritmo{Fusionar($p, arbol_x, arbol_y, imagenes$)}{En realidad llamado BuscarInterseccion, devuelve las im'agenes en $imagenes$ que contienen al punto $p$ utilizando los 'arboles}{O($n$)}
+\begin{algorithmic}[1]
+\STATE $intersecciones_x$ = $arbol_x$.BuscarInterseccion($p$)
+\STATE $intersecciones_y$ = $arbol_y$.BuscarInterseccion($p$)
+\FORALL{$int$ {\bf in} $intersecciones_x$}
+	\STATE marcar al padre de $int$ en $x$
+\ENDFOR
+\FORALL{$int$ {\bf in} $intersecciones_y$}
+	\STATE marcar al padre de $int$ en $y$
+\ENDFOR
+\FORALL{$img$ {\bf in} $imagenes$}
+	\IF{$img$ est'a marcado en $x$ e $y$}
+		\STATE $resultados$.agregar($img$)
+	\ENDIF
+	\STATE limpiar marcas de $img$
+\ENDFOR
+\RETURN $resultados$
 \end{algorithmic}

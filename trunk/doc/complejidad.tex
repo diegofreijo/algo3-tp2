@@ -2,10 +2,21 @@
 \subsection{BuscarInterseccion}
 \subsubsection{Temporal}
 O($log(n)+k$)
+
 Siendo $n$ la cantidad de nodos totales del 'arbol de intervalos y k la cantidad de intervalos obtenidos en la b'usqueda. 
-En realidad en cada nodo, como se explic'o anteriormente, si la cantidad de intervalos obtenidos es menor a la cantidad de intervalos de la lista se realizan $k+1$ comparaciones pero la constante 1 es despreciable. Si se devuelven todos los intervalos se realizan k comparaciones
+
+En realidad en cada nodo, como se explic'o anteriormente, si la cantidad de intervalos obtenidos es menor a la cantidad de intervalos de la lista se realizan $k+1$ comparaciones pero la constante 1 es despreciable. Si se devuelven todos los intervalos se realizan k comparaciones.
+
 $log(n)$ ya que es un 'arbol balanceado y lo recorro desde la raiz hasta alguna hoja.
 
 \subsubsection{Espacial}
-O($n$) 
+O($n$)
+
 Ya que cada segmento es guardado en dos listas y el 'arbol es balanceado.
+
+\subsection{Fusionar}
+\subsubsection{Temporal}
+Como se explic'o anteriormente en la introducci'on del presente, en el peor de los casos 'este algoritmo deber'a recorrer 3 veces todas las im'agenes (caso en el que el punto est'e contendio en toda im'agen de la pantalla). Por lo que la complejidad ser'a O($3n$) = O($n$).
+
+\subsubsection{Espacial}
+El algoritmo s'olo requiere (sin contar el espacio para la lista de resultados) los bits de seleccionado en las im'agenes y las referencias a los padres en cada intervalo. Por lo que se requieren cantidad de n'umeros del 'orden de la cantidad de im'agenes, siendo la complejidad O($n$).
