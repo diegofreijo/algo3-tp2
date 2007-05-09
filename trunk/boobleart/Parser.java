@@ -30,12 +30,12 @@ public abstract class Parser
 	        {
 	        	n = Long.valueOf(in.readLine().trim());
 	        	instancia = new Instancia();
-		        for(int i = 0; i < n; ++i)
+		        for(Integer i = 0; i < n; ++i)
 		        {
 		        	linea = LeerLinea(in.readLine().trim());
 		        	imagen = new Imagen(
-		        				new Intervalo(linea.get(0),linea.get(1)), 
-		        				new Intervalo(linea.get(2),linea.get(3)));
+		        				new Intervalo(linea.get(0),linea.get(1),i), 
+		        				new Intervalo(linea.get(2),linea.get(3),i));
 		        	instancia.imagenes.add(imagen);
 		        }
 		        ret.add(instancia);

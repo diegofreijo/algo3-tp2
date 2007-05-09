@@ -261,18 +261,7 @@ public class IntervalTree
 	{
 		List<Intervalo> lista = new ArrayList<Intervalo>();
 		List<Intervalo> lista2 = new ArrayList<Intervalo>();
-		Intervalo int1 = new Intervalo(1, 6);
-		Intervalo int2 = new Intervalo(2, 8);
-		Intervalo int3 = new Intervalo(3, 5);
-		//Intervalo int4 = new Intervalo(1,5);
-		Intervalo int5 = new Intervalo(8, 10);
-		Intervalo int6 = new Intervalo(22, 29);
-		lista.add(int1);
-		lista.add(int2);
-		lista.add(int3);
-		//lista.add(int4);
-		lista.add(int5);
-		lista.add(int6);
+		
 		IntervalTree RBinterv = new IntervalTree(lista);
 		System.out.println("key: " + RBinterv.arbol.raiz().key);
 		System.out.println("val ini: " + RBinterv.arbol.raiz().valor.inicio);
