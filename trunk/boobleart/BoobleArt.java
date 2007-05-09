@@ -1,120 +1,155 @@
 package boobleart;
 
-import intervalTree.IntervalTree;
+import interval_tree.IntervalTree;
 import java.util.List;
 import java.util.ArrayList;
+import utilidades.Diferencias;
+import utilidades.Estadisticas;
+import utilidades.Imagen;
+import utilidades.Instancia;
+import utilidades.Intervalo;
+import utilidades.Punto;
+import utilidades.ResultadoConsulta;
 
 public abstract class BoobleArt
 {
-	public static void Ejecutar()
-	{
+	private static Estadisticas es;
+	private static int cant_diferencias = 0;
+	
+	public static void Ejecutar(boolean comparar)
+	{	
 		// Leo los datos de entrada
-		//System.out.println("Leyendo entrada...");
-		ArrayList<Instancia> instancias = Parser.LeerInstancias();
-		ArrayList<Punto> consultas = Parser.LeerConsultas();
+		System.out.println("Leyendo entradas...");
+		List<Instancia> instancias = Parser.LeerInstancias();
+		List<Punto> consultas = Parser.LeerConsultas();
 
+		// Verifico la validez de los parametros
+		if(instancias.size() == 0 || consultas.size() == 0)
+		{
+			System.out.println("Error en los parametros de entrada");
+			return;
+		}
+		
 		// Elementos de cada instancia
 		IntervalTree arbol_x, arbol_y;
 		List<Intervalo> intervalos_x, intervalos_y;
-		List<Consulta> resultados, resultados_fb;
+		List<ResultadoConsulta> resultados, resultados_fb;
 
+		// Limpio los archivos de salida
+		Parser.LimpiarArchivos();
+		
+		
 		// Proceso cada instancia
+		System.out.println("Ejecutando...");
 		for (Instancia instancia : instancias)
 		{
-			//System.out.println("Construyendo instancia...");
-			intervalos_x = new ArrayList<Intervalo>();
-			intervalos_y = new ArrayList<Intervalo>();
-
+			es = new Estadisticas(instancia.imagenes.size(), consultas.size());
+			intervalos_x = new ArrayList<Intervalo>(); ++es.armado;
+			intervalos_y = new ArrayList<Intervalo>(); ++es.armado;
+			
 			// Cargo los intervalos
 			for (Imagen img : instancia.imagenes)
 			{
-				intervalos_x.add(img.x);
-				intervalos_y.add(img.y);
+				intervalos_x.add(img.x); ++es.armado;
+				intervalos_y.add(img.y); ++es.armado;
 			}
 
 			// Creo los arboles
-			arbol_x = new IntervalTree(intervalos_x);
-			arbol_y = new IntervalTree(intervalos_y);
-
+			arbol_x = new IntervalTree(intervalos_x, es); ++es.armado;
+			arbol_y = new IntervalTree(intervalos_y, es); ++es.armado;
+			
 			// Realizo las consultas
-			//System.out.println("Consultando...");
-			resultados = new ArrayList<Consulta>();
+			resultados = new ArrayList<ResultadoConsulta>();
 			for (Punto p : consultas)
 			{
 				resultados.add(BuscarInterseccion(p, arbol_x, arbol_y, instancia.imagenes));
+				es.Almacenar();
 			}
-
-			// Ejecuto el algoritmo por fuerza bruta y comparo
-			//System.out.println("Ejecutando fuerza bruta...");
-			resultados_fb = new ArrayList<Consulta>();
-			resultados_fb = BuscarInterseccionFB(instancia, consultas);
-			for(int i = 0; i < resultados.size(); ++i)
+			
+			// Escribo los resultados para esta instancia
+			Parser.EscribirResultados(resultados);
+			
+			// Si se me pidio, ejecuto el algoritmo por fuerza bruta y comparo
+			if(comparar)
 			{
-				if (!Comparar(resultados.get(i), resultados_fb.get(i)))
+				resultados_fb = new ArrayList<ResultadoConsulta>();
+				resultados_fb = BuscarInterseccionFB(instancia, consultas);
+				es.AlmacenarFB();
+				Diferencias diferencias = new Diferencias(instancia);
+				for(int i = 0; i < resultados.size(); ++i)
 				{
-					System.out.println("Son diferentes... =(");
-					System.out.println("Consulta:	" + consultas.get(i));
-					System.out.println("Imagenes:	" + instancia.imagenes);
-					System.out.println("eficiente:	" + resultados.get(i).toString());
-					System.out.println("fuerza bruta:	" + resultados_fb.get(i).toString());
-					System.out.println("=========================================");
+					if (!Comparar(resultados.get(i), resultados_fb.get(i)))
+					{
+						diferencias.consultas.add(consultas.get(i));
+						diferencias.resultados.add(resultados.get(i));
+						diferencias.resultados_fb.add(resultados_fb.get(i));
+						++cant_diferencias;
+					}
 				}
-				/*else
-				{
-					System.out.println("¡Son iguales! =)");
-					System.out.println("resultados:	" + resultados.get(i).toString());
-					System.out.println("=========================================");
-				}*/
+				Parser.EscribirDiferencias(diferencias);
 			}
+			
+			// Escribo las estadisticas para esta instancia
+			Parser.EscribirEstadisticas(es);
 		}
+		System.out.println("Instancias procesadas");
+		if(comparar) System.out.println("Diferencias encontradas: " + cant_diferencias);
 	}
-
-	private static Consulta BuscarInterseccion(Punto p, IntervalTree arbol_x, IntervalTree arbol_y, List<Imagen> imagenes)
+	
+	private static ResultadoConsulta BuscarInterseccion(Punto p, IntervalTree arbol_x, IntervalTree arbol_y, List<Imagen> imagenes)
 	{
-		List<Intervalo> intersecciones_x = arbol_x.BuscarInterseccion(p.x);
-		List<Intervalo> intersecciones_y = arbol_y.BuscarInterseccion(p.y);
-		Consulta consulta = new Consulta();
+		List<Intervalo> intersecciones_x = arbol_x.BuscarInterseccion(p.x); ++es.fusion;
+		List<Intervalo> intersecciones_y = arbol_y.BuscarInterseccion(p.y); ++es.fusion;
+		ResultadoConsulta resultado = new ResultadoConsulta(); ++es.fusion;
 
+		// Guardo la cantidad de intervalos encontrados para las estadisticas
+		es.intersecciones_fusion = intersecciones_x.size() * intersecciones_y.size();
+		
 		// Busco ids iguales en ambas intersecciones
 		for (int i = 0; i < intersecciones_x.size(); ++i)
 		{
+			++es.fusion;
 			for (int j = 0; j < intersecciones_y.size(); ++j)
 			{
+				++es.fusion;
+				++es.fusion;
 				if (intersecciones_x.get(i).id == intersecciones_y.get(j).id)
 				{
-					// Tengo un resultado, agrego la imagen correspondiente al
-					// id encontrado
-					consulta.imagenes.add(imagenes.get(intersecciones_x.get(i).id));
+					// Tengo un resultado, agrego la imagen correspondiente al id encontrado
+					resultado.imagenes.add(imagenes.get(intersecciones_x.get(i).id)); es.fusion+=3;
 					break;
 				}
 			}
 		}
 
-		return consulta;
+		return resultado;
 	}
-
-	private static List<Consulta> BuscarInterseccionFB(Instancia instancia, ArrayList<Punto> consultas)
+	
+	private static List<ResultadoConsulta> BuscarInterseccionFB(Instancia instancia, List<Punto> consultas)
 	{
-		List<Consulta> resultados = new ArrayList<Consulta>();
-		Consulta actual;
+		List<ResultadoConsulta> resultados = new ArrayList<ResultadoConsulta>(); ++es.fb;
+		ResultadoConsulta actual;
 
 		for (Punto p : consultas)
 		{
-			actual = new Consulta();
+			++es.fb;
+			actual = new ResultadoConsulta(); ++es.fb;
 			for (Imagen img : instancia.imagenes)
 			{
+				++es.fb;
+				++es.fb;
 				if (img.Pertenece(p))
 				{
-					actual.imagenes.add(img);
+					actual.imagenes.add(img); ++es.fb;
 				}
 			}
-			resultados.add(actual);
+			resultados.add(actual); ++es.fb;
 		}
 
 		return resultados;
 	}
 
-	private static boolean Comparar(Consulta resultados, Consulta resultados_fb)
+	private static boolean Comparar(ResultadoConsulta resultados, ResultadoConsulta resultados_fb)
     {
 		for(Imagen img: resultados.imagenes)
 		{
