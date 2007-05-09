@@ -1,4 +1,31 @@
 \section{Pseudoc'odigos}
+\algoritmo{Insertar(int $k$, Nodo $valor$)}
+\begin{algorithmic}[1]
+\STATE $elem \leftarrow new Nodo2()$
+\STATE $elem.construir(k, valor)$
+\STATE $y \leftarrow null$
+\STATE $x \leftarrow this.root$
+\WHILE{x != null}
+	\STATE $y \leftarrow x$
+	\IF{k $<$ x.key}
+		\STATE $x \leftarrow x.izq$
+	\ELSE
+		\STATE $x \leftarrow x.der$
+	\ENDIF
+\ENDWHILE
+\STATE $elem.padre \leftarrow y$
+\IF{y $<$ null}
+	\STATE $this.root \leftarrow elem$
+\ELSEIF{k $<$ y.key}
+	\STATE $y.izq \leftarrow elem$
+\ELSE
+	\STATE $y.der \leftarrow elem$
+\ENDIF
+\STATE $this.tamanio++$
+\STATE $arreglarInv(elem)$
+\end{algorithmic}
+
+
 \algoritmo{BuscarInterseccion($valorBusq$)}{Devuelve la lista de intervalos que contienen al valor buscado}{O($log(n)+k$)}
 \begin{algorithmic}[1]
 \WHILE{!salir}
