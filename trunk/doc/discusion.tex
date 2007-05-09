@@ -6,26 +6,3 @@ El segundo cuenta las operaciones b'asicas para realizar una consulta. Notar que
 En el tercero vemos que el algoritmo de fusi'on tambi'en representa una complejidad te'orica correcta. Se puede ver que existe una l'inea como valor m'inimo de la complejidad. 'Estos valores corresponden a los mejores casos, donde pocos intervalos son devueltos por los 'arboles. Pero como siempre, a'un en 'estos casos, se deber'a recorrer toda la lista de im'agenes, siempre existir'a 'esa cota m'inima.
 
 El cuarto gr'afico intenta demostrar dos cosas. Por un lado, notar que el algoritmo de fusi'on es realmente un cuello de botella ya que si se cuentan solamente la cantidad de operaciones que requieren los 'arboles para devolver los intervalos de intersecci'on, 'estas son mucho menores que cuando se agrega 'este 'ultimo algoritmo. Pero por otro lado se v'e que, a pesar de lo costoso que es la fusi'on, la complejidad total es menor que la de fuerza bruta. Por lo que las estructuras y algoritmos implementados podr'iamos considerarlos \emph{eficientes}. Notar que el mismo patr'on notado en el gr'afico anterior de la cota m'inima se aplica aqu'i, ya que se suman los mismos valores a los del costo de la consulta.
-
-\section{Respuestas}
-En este caso, se analiza como seria el programa, si se agregasen fotos al mapa.
-
-
-El problema que se presenta es que el Interval Tree esta pensado para, una vez creado, no ser modificado. Al intentar ingresar un intervalo nuevo, este podria agrandar el rango, y asi no quedaria la idea original plasmada, ya que ya no seria el pivot el elemento elegido.
-
-
-Para resolverlo, se propone, en la funcion "Insertar Foto", crear nuevamente ambos arboles de intervalos, conteniendo los nuevos intervalos, para que se balancee nuevamente y asi no modificar su complejidad.
-
-
-Otra alternativa, es, por ejemplo en el caso en que la nueva foto no modifique el rango total, ir viendo nodo por nodo para ver en cual se puede insertar, y ahi ponerlo en las listas, ordenandolas nuevamente.
-
-
-En el primer caso, la complejidad seria la de crear otra vez los dos arboles, o sea O($n\log_2(n)$).
-
-
-En el segundo, la complejidad seria similar a la busqueda, recorriendo el arbol, y una vez encontrado el nodo indicado, agregar a las listas y ordenar. En este caso es O($\log_2(n) + 2n\log_2(n)$). Se remarca que en la parte de ordenar, la lista va a estar practicamente ordenada, lo que achica, en practica, la complejidad del algoritmo.
-
-Una vez realizado esto, la interfaz superior del programa no se modifica, a excepci'on de agregar la funcion insertar. El resto de las complejidades se mantienen como son.
-
-Hay que remarcar que esta es una variante al Interval Tree, ya que este no esta pensado, en su version standard, para realizar inserciones.
-
