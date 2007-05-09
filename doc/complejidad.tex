@@ -1,7 +1,6 @@
 \section{An'alisis de complejidad}
-
-\subsection{Temporal}
 \subsection{Creaci'on}
+\subsubsection{Temporal}
 El peor caso para la creaci'on del Interval es que todos los intervalos sean disjuntos, lo que provocar'ia que en la lista Centro de cada nodo, haya solo un intervalo. Vamos a tomar este caso para analizar la complejidad.
 
 La complejidad de las funciones Anterior, Posterior y Contiene es O(1), ya que solo realiza una comparaci'on y devuelve true o false.
@@ -14,7 +13,7 @@ El tamaño de la entrada se calcula de la siguiente manera. La entrada contiene l
 
 Por lo cual, la complejidad de la creaci'on queda O($\log_2(n)+n$).
 
-{\bf\small Espacial}
+\subsubsection{Espacial}
 
 La complejidad espacial de la creaci'on del Interval Tree es la siguiente: en cada nodo se guardan 2 enteros y 2 listas iguales de enteros con la cantidad de fotos que tocan a ese punto. Esto se repite, en peor caso, n veces. Por lo tanto, el orden de complejidad del algoritmo es O($n$).
 
