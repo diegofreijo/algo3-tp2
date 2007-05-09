@@ -2,7 +2,7 @@ package interval_tree;
 
 import java.util.ArrayList;
 import java.util.List;
-import RedBlack.*;
+import redblack_tree.*;
 import utilidades.Estadisticas;
 import utilidades.Intervalo;
 
