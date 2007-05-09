@@ -1,0 +1,28 @@
+\section{Pseudoc'odigos}
+\algoritmo{BuscarInterseccion($valorBusq$)}{Devuelve la lista de intervalos que contienen al valor buscado}{O($log(n)+k$)}
+\begin{algorithmic}[1]
+\WHILE{!salir}
+	\IF{nodo.key $<$ $valorBusq$}
+		\STATE agrego a la solucion los intervalos que terminan despues de $valorBusq$
+		\IF{derecha no es $null$}
+				\STATE voy para la derecha
+		\ELSE
+				\STATE salir
+		\ENDIF
+	\ELSIF{nodo.key $>$ $valorBusq$}
+		\STATE agrego a la solucion los intervalos que empiezan antes de $valorBusq$
+		\IF{izquierda no es $null$}
+				\STATE voy para la izquierda
+		\ELSE
+				\STATE salir
+		\ENDIF
+	\ELSE
+		\STATE agrego todos los intervalos a la solucion
+		\IF{derecha no es $null$}
+				\STATE voy para la derecha
+		\ELSE
+				\STATE salir
+		\ENDIF
+	\ENDIF
+\ENDWHILE
+\end{algorithmic}
