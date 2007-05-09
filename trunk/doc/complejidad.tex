@@ -3,7 +3,7 @@
 \subsubsection{Temporal}
 O($log(n)+k$)
 Siendo $n$ la cantidad de nodos totales del 'arbol de intervalos y k la cantidad de intervalos obtenidos en la b'usqueda. 
-En realidad en cada nodo, como se explic'o anteriormente, se realizan $k+1$ comparaciones pero la constante 1 es despreciable.
+En realidad en cada nodo, como se explic'o anteriormente, si la cantidad de intervalos obtenidos es menor a la cantidad de intervalos de la lista se realizan $k+1$ comparaciones pero la constante 1 es despreciable. Si se devuelven todos los intervalos se realizan k comparaciones
 $log(n)$ ya que es un 'arbol balanceado y lo recorro desde la raiz hasta alguna hoja.
 
 \subsubsection{Espacial}
