@@ -2,9 +2,9 @@ package boobleart;
 
 public class Punto
 {
-	public long x,y;
+	public int x,y;
 	
-	public Punto(long x, long y)
+	public Punto(int x, int y)
 	{
 		this.x = x;
 		this.y = y;

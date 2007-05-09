@@ -26,7 +26,7 @@ public class Nodo
 		
 		if(intervalos.size() > 0)
 		{
-			Intervalo pivot = new Intervalo(0, 0);
+			Intervalo pivot = new Intervalo();
 			pivot = intervalos.get(0);
 			
 			List<Intervalo> mayores = new ArrayList<Intervalo>();
@@ -69,7 +69,7 @@ public class Nodo
 		
 		if(intervalos.size() > 0)
 		{
-			Intervalo pivot = new Intervalo(0, 0);
+			Intervalo pivot = new Intervalo();
 			pivot = intervalos.get(0);
 			
 			List<Intervalo> mayores = new ArrayList<Intervalo>();

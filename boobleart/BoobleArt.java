@@ -36,13 +36,38 @@ public abstract class BoobleArt
 			// Realizo las consultas
 			for(Punto p: consultas)
 			{
-				BuscarInterseccion(p, arbol_x, arbol_y);
+				BuscarInterseccion(p, arbol_x, arbol_y,instancia.imagenes);
 			}
 		}
 	}
 
-	private static List<Imagen> BuscarInterseccion(Punto p, IntervalTree arbol_x, IntervalTree arbol_y)
+	private static List<Imagen> BuscarInterseccion(Punto p, IntervalTree arbol_x, IntervalTree arbol_y, List<Imagen> imagenes)
     {
+		List<Intervalo> listaX = arbol_x.BuscarInterseccion(p.x);
+		List<Intervalo> listaY = arbol_y.BuscarInterseccion(p.y);
+		
+		List<Integer> resultado = new ArrayList<Integer>();
+		
+		int i = 0;
+		
+		while(i < listaX.size())
+		{
+			int k = 0;
+			while(k < listaY.size())
+			{
+				if(listaX.get(i).id == listaY.get(k).id)
+				{
+					resultado.add(listaX.get(i).id);
+					break;
+				}else{
+					k++;
+				}
+			}
+			i++;
+		}
+		
+		//EN RESULTADOS TENES LA LISTA DE LOS ID DE LAS FOTOS QUE SE MUESTRAN		
+		
 		return null;
     }
 }
