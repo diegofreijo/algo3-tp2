@@ -1,4 +1,25 @@
 \section{An'alisis de complejidad}
+
+\subsection{Temporal}
+\subsection{Creaci'on}
+El peor caso para la creaci'on del Interval es que todos los intervalos sean disjuntos, lo que provocar'ia que en la lista Centro de cada nodo, haya solo un intervalo. Vamos a tomar este caso para analizar la complejidad.
+
+La complejidad de las funciones Anterior, Posterior y Contiene es O(1), ya que solo realiza una comparaci'on y devuelve true o false.
+
+La complejidad de BuscoRango es O(n), ya que recorre todos los intervalos para encontrar el menor inicio y el mayor fin. Dentro del while, las operaciones son O(1).
+
+Dentro del algoritmo del constructor, se llama una vez a la funcion BuscoRango y se repiten n veces las funciones Anterior, Posterior y Contiene. Luego, se repite recursivamente $\log_2(n)$ veces. Por lo tanto la complejidad es del orden $n \log_2(n)$.
+
+El tamaño de la entrada se calcula de la siguiente manera. La entrada contiene la cantidad de fotos, n, y sus coordenadas. Los valores de las coordenadas estan acotadas por el tamaño de la pantalla, lo que hace que sea constante, por lo cual, el tamaño de la entrada queda $\log_2(n)+n$, que es del orden de n.
+
+Por lo cual, la complejidad de la creaci'on queda O($\log_2(n)+n$).
+
+{\bf\small Espacial}
+
+La complejidad espacial de la creaci'on del Interval Tree es la siguiente: en cada nodo se guardan 2 enteros y 2 listas iguales de enteros con la cantidad de fotos que tocan a ese punto. Esto se repite, en peor caso, n veces. Por lo tanto, el orden de complejidad del algoritmo es O($n$).
+
+
+
 \subsection{BuscarInterseccion}
 \subsubsection{Temporal}
 O($log(n)+k$)
@@ -20,3 +41,4 @@ Como se explic'o anteriormente en la introducci'on del presente, en el peor de l
 
 \subsubsection{Espacial}
 El algoritmo s'olo requiere (sin contar el espacio para la lista de resultados) los bits de seleccionado en las im'agenes y las referencias a los padres en cada intervalo. Por lo que se requieren cantidad de n'umeros del 'orden de la cantidad de im'agenes, siendo la complejidad O($n$).
+
