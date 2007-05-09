@@ -1,7 +1,6 @@
 \section{Pseudoc'odigos}
-\algoritmo{Insertar($k$, $valor$)}
+\algoritmo{Insertar($k$, $valor$)}{}{}
 \begin{algorithmic}[1]
-\STATE $elem \leftarrow new Nodo2()$
 \STATE $elem.construir(k, valor)$
 \STATE $y \leftarrow null$
 \STATE $x \leftarrow this.root$
@@ -16,7 +15,7 @@
 \STATE $elem.padre \leftarrow y$
 \IF{y $<$ null}
 	\STATE $this.root \leftarrow elem$
-\ELSEIF{k $<$ y.key}
+\ELSIF{k $<$ y.key}
 	\STATE $y.izq \leftarrow elem$
 \ELSE
 	\STATE $y.der \leftarrow elem$
@@ -61,9 +60,9 @@
 \begin{algorithmic}[1]
 \STATE $intervalos \leftarrow  nodo.fin$
 \STATE $i \leftarrow 0$
-\WHILE{i < cantidad(intervalos) && intervalos($i$).fin $>=$ valor }
-	agregar intervalo a la solucion
- 	$i++$
+\WHILE{i < cantidad(intervalos) $\land$ intervalos($i$).fin $>=$ valor }
+	\STATE agregar intervalo a la solucion
+ 	\STATE $i++$
 \ENDWHILE
 \end{algorithmic}
 
@@ -73,9 +72,9 @@
 \begin{algorithmic}[1]
 \STATE $intervalos \leftarrow  nodo.inicio$
 \STATE $i \leftarrow cantidad(intervalos)-1$
-\WHILE{i > 0 && intervalos($i$).inicio $<=$ valor }
-	agregar intervalo a la solucion
- 	$i--$
+\WHILE{i > 0 $\land$ intervalos($i$).inicio $<=$ valor }
+	\STATE agregar intervalo a la solucion
+ 	\STATE $i--$
 \ENDWHILE
 \end{algorithmic}
 
