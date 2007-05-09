@@ -15,7 +15,6 @@ public class IntervalTree
 		int i = 0;
 		while (i < nodos.nodos.size())
 		{
-			// System.out.println(i);
 			arbol.insertar(nodos.nodos.get(i).pivot, nodos.nodos.get(i));
 			i++;
 		}
@@ -29,7 +28,6 @@ public class IntervalTree
 		Rango rango = BuscoRango(intervalos);
 		Integer pivot = rango.fin - rango.inicio;
 		pivot = rango.inicio + pivot / 2;
-		// System.out.println(pivot);
 		int i = 0;
 		while (i < intervalos.size())
 		{
@@ -140,7 +138,6 @@ public class IntervalTree
 				// si la clave es menor agrego a la solucion los intervalos que
 				// terminan
 				// despues que 'valorBusq' y voy para la derecha.
-				System.out.println("1: " + nodoAux.key);
 				interv.addAll(dameTermDespues(nodoAux.valor, valorBusq));
 				if (nodoAux.der() != null)
 				{
@@ -156,16 +153,13 @@ public class IntervalTree
 				// si la clave es mayor agrego a la solucion los intervalos que
 				// empiezan
 				// antes que 'valorBusq' y voy para la izquierda.
-				System.out.println("2: " + nodoAux.key);
 				interv.addAll(dameEmpAntes(nodoAux.valor, valorBusq));
 				if (nodoAux.izq() != null)
 				{
-					System.out.println("2a");
 					nodoAux = nodoAux.izq();
 				}
 				else
 				{
-					System.out.println("2b");
 					salir = true;
 				}
 			}
@@ -174,7 +168,6 @@ public class IntervalTree
 				// si es igual al valor de la raiz agrego todos los intervalos a
 				// la solucion
 				interv.addAll(nodoAux.valor.inicio);
-				System.out.println("3: " + nodoAux.key);
 				// salir=true; //nose si esta bien esto
 				if (nodoAux.der() != null)
 				{
@@ -242,8 +235,7 @@ public class IntervalTree
 
 		public List<Intervalo> centro;
 
-		public Listas(List<Intervalo> izq, List<Intervalo> der,
-		        List<Intervalo> cen)
+		public Listas(List<Intervalo> izq, List<Intervalo> der, List<Intervalo> cen)
 		{
 			izquierda = izq;
 			derecha = der;
@@ -254,23 +246,5 @@ public class IntervalTree
 	private class Nodos
 	{
 		public List<Nodo> nodos = new ArrayList<Nodo>();
-	}
-
-	// public static void main(String[] args)
-	public static void main()
-	{
-		List<Intervalo> lista = new ArrayList<Intervalo>();
-		List<Intervalo> lista2 = new ArrayList<Intervalo>();
-		IntervalTree RBinterv = new IntervalTree(lista);
-		System.out.println("key: " + RBinterv.arbol.raiz().key);
-		System.out.println("val ini: " + RBinterv.arbol.raiz().valor.inicio);
-		System.out.println("val fin: " + RBinterv.arbol.raiz().valor.fin);
-		lista2 = RBinterv.BuscarInterseccion(24);
-		System.out.println(lista2.toString());
-		System.out.println(RBinterv.toString());
-		for (Intervalo interv : lista2)
-		{
-			System.out.println(interv.toString());
-		}
 	}
 }

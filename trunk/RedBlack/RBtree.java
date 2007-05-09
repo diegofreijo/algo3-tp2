@@ -94,7 +94,6 @@ public class RBtree
 		if (elem.padre == null)
 		{
 			elem.color = NEGRO;
-			System.out.println("Case1");
 		}
 		else
 		{
@@ -106,7 +105,6 @@ public class RBtree
 	{
 		if (elem.padre().color == NEGRO)
 		{
-			System.out.println("Case2");
 			return; // aca NO se rompe el invariante.
 		}
 		else
@@ -125,7 +123,6 @@ public class RBtree
 				elem.tio().color = NEGRO;
 				elem.abuelo().color = ROJO;
 				insert_case1(elem.abuelo());
-				System.out.println("Case3");
 			}
 			else
 			{
@@ -144,13 +141,11 @@ public class RBtree
 		{
 			this.rotarIzq(elem.padre);
 			elem = elem.izq;
-			System.out.println("Case4");
 		}
 		else if (elem == elem.padre.izq && elem.padre == elem.abuelo().der)
 		{
 			this.rotarDer(elem.padre);
 			elem = elem.der;
-			System.out.println("Case4");
 		}
 		insert_case5(elem);
 	}
@@ -159,17 +154,14 @@ public class RBtree
 	{
 		elem.padre.color = NEGRO;
 		elem.abuelo().color = ROJO;
-		System.out.println("Case5");
 		if (elem == elem.padre.izq && elem.padre == elem.abuelo().izq)
 		{
-			System.out.println("rotarDer");
 			this.rotarDer(elem.abuelo());
 		}
 		else
 		{
 			// Aca, elem es hijo derecho && el padre de elem tambien es hijo
 			// derecho. */
-			System.out.println("rotarIzq");
 			this.rotarIzq(elem.abuelo());
 		}
 	}
@@ -192,7 +184,6 @@ public class RBtree
 		}
 		y.izq = elem;
 		elem.padre = y;
-		System.out.println("FIn rotarIzq");
 	}
 
 	private void rotarDer(Nodo2 elem)
@@ -212,43 +203,5 @@ public class RBtree
 		}
 		x.der = elem;
 		elem.padre = x;
-		System.out.println("rotarDer");
-	}
-
-	public static void main(String[] args)
-	{
-		// Leo los datos de entrada
-		/*
-		 * ArrayList<int> instancias = Parser.LeerInstancias(); ArrayList<Punto>
-		 * consultas = Parser.LeerConsultas();
-		 */
-		// Genero los arboles
-		RBtree rb = new RBtree();
-		/*
-		 * Integer valor = new Integer(33); Integer valor1 = new Integer(44);
-		 * Integer valor2 = new Integer(55); Integer valor3 = new Integer(66);
-		 * int c1 = 33; int c2 = 44; int c3 = 55; int c4 = 66;
-		 * rb.insertar(c1,valor); rb.insertar(c2,valor1);
-		 * rb.insertar(c3,valor2); rb.insertar(c4,valor3);
-		 */
-		// System.out.println("===============");
-		System.out.println(rb.raiz().izq.key);
-		System.out.println(rb.raiz().izq.valor);
-		System.out.println(rb.raiz().izq.color);
-		System.out.println(rb.raiz().key);
-		System.out.println(rb.raiz().valor);
-		System.out.println(rb.raiz().color);
-		System.out.println(rb.derecha().key);
-		System.out.println(rb.derecha().valor);
-		System.out.println(rb.derecha().color);
-		System.out.println(rb.derecha().der().key);
-		System.out.println(rb.derecha().der().valor);
-		System.out.println(rb.derecha().der().color);
-		/*
-		 * System.out.println(rb.derecha().der().der().key);
-		 * System.out.println(rb.derecha().der().der().valor);
-		 * System.out.println(rb.derecha().der().der().color);
-		 */
-		// arbol_y = new IntervalTree(intervalos_y);
 	}
 }

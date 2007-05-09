@@ -14,4 +14,10 @@ public class Imagen
 	{
 		return x.toString() + " " + y.toString(); 
 	}
+
+	public boolean Pertenece(Punto p)
+    {
+	    return 	(this.x.inicio <= p.x && p.x <= this.x.fin) && 
+	    		(this.y.inicio <= p.y && p.y <= this.y.fin);
+    }
 }
