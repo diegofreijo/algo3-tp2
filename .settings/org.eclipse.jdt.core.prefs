@@ -1,4 +1,4 @@
-#Wed May 09 03:02:46 ART 2007
+#Wed May 09 12:32:59 ART 2007
 eclipse.preferences.version=1
 org.eclipse.jdt.core.formatter.align_type_members_on_columns=false
 org.eclipse.jdt.core.formatter.alignment_for_arguments_in_allocation_expression=0
@@ -23,10 +23,10 @@ org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_constructor_declar
 org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_method_declaration=0
 org.eclipse.jdt.core.formatter.blank_lines_after_imports=1
 org.eclipse.jdt.core.formatter.blank_lines_after_package=1
-org.eclipse.jdt.core.formatter.blank_lines_before_field=1
+org.eclipse.jdt.core.formatter.blank_lines_before_field=0
 org.eclipse.jdt.core.formatter.blank_lines_before_first_class_body_declaration=0
 org.eclipse.jdt.core.formatter.blank_lines_before_imports=1
-org.eclipse.jdt.core.formatter.blank_lines_before_member_type=1
+org.eclipse.jdt.core.formatter.blank_lines_before_member_type=0
 org.eclipse.jdt.core.formatter.blank_lines_before_method=1
 org.eclipse.jdt.core.formatter.blank_lines_before_new_chunk=1
 org.eclipse.jdt.core.formatter.blank_lines_before_package=0
@@ -44,14 +44,14 @@ org.eclipse.jdt.core.formatter.brace_position_for_switch=next_line
 org.eclipse.jdt.core.formatter.brace_position_for_type_declaration=next_line
 org.eclipse.jdt.core.formatter.comment.clear_blank_lines=true
 org.eclipse.jdt.core.formatter.comment.format_comments=true
-org.eclipse.jdt.core.formatter.comment.format_header=false
+org.eclipse.jdt.core.formatter.comment.format_header=true
 org.eclipse.jdt.core.formatter.comment.format_html=true
 org.eclipse.jdt.core.formatter.comment.format_source_code=true
 org.eclipse.jdt.core.formatter.comment.indent_parameter_description=true
 org.eclipse.jdt.core.formatter.comment.indent_root_tags=true
 org.eclipse.jdt.core.formatter.comment.insert_new_line_before_root_tags=insert
 org.eclipse.jdt.core.formatter.comment.insert_new_line_for_parameter=insert
-org.eclipse.jdt.core.formatter.comment.line_length=80
+org.eclipse.jdt.core.formatter.comment.line_length=120
 org.eclipse.jdt.core.formatter.compact_else_if=true
 org.eclipse.jdt.core.formatter.continuation_indentation=2
 org.eclipse.jdt.core.formatter.continuation_indentation_for_array_initializer=2
@@ -242,7 +242,7 @@ org.eclipse.jdt.core.formatter.keep_then_statement_on_same_line=true
 org.eclipse.jdt.core.formatter.lineSplit=80
 org.eclipse.jdt.core.formatter.number_of_blank_lines_at_beginning_of_method_body=0
 org.eclipse.jdt.core.formatter.number_of_empty_lines_to_preserve=3
-org.eclipse.jdt.core.formatter.put_empty_statement_on_new_line=true
+org.eclipse.jdt.core.formatter.put_empty_statement_on_new_line=false
 org.eclipse.jdt.core.formatter.tabulation.char=tab
 org.eclipse.jdt.core.formatter.tabulation.size=4
 org.eclipse.jdt.core.formatter.use_tabs_only_for_leading_indentations=true
