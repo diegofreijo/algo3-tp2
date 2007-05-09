@@ -26,3 +26,23 @@
 	\ENDIF
 \ENDWHILE
 \end{algorithmic}
+
+\algoritmo{dameTermDespues($nodo$, $valor$)}{Devuelve una lista con los intervalos del nodo que terminan despues de valor, utilizando la lista ordenada por el valor fin de mayor a menor}{O($+k$)}
+\begin{algorithmic}[1]
+\STATE $intervalos \leftarrow  nodo.fin$
+\STATE $i \leftarrow 0$
+\WHILE{i < cantidad(intervalos) && intervalos($i$).fin $>=$ valor }
+	agregar intervalo a la solucion
+ 	$i++$
+\ENDWHILE
+\end{algorithmic}
+
+\algoritmo{dameEmpAntes($nodo$, $valor$)}{Devuelve una lista con los intervalos del nodo que empiezan antes de valor, utilizando la lista ordenada por el valor inicio de mayor a menor}{O($+k$)}
+\begin{algorithmic}[1]
+\STATE $intervalos \leftarrow  nodo.inicio$
+\STATE $i \leftarrow cantidad(intervalos)-1$
+\WHILE{i > 0 && intervalos($i$).inicio $<=$ valor }
+	agregar intervalo a la solucion
+ 	$i--$
+\ENDWHILE
+\end{algorithmic}
