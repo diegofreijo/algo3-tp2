@@ -8,7 +8,7 @@ pantalla_x = int(sys.argv[2])
 # Alto maximo de las imagenes
 pantalla_y = int(sys.argv[3])
 
-f = open('Tp2Ej4.in','w')
+f = open('../in/Tp2Ej4.in','w')
 
 # Escribo la cantidad de consultas
 f.write(str(consultas) + '\n')
