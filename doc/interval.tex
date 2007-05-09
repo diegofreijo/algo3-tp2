@@ -1,0 +1,51 @@
+\newpage
+\section{Interval Tree}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pseudocodigos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\subsection{Pseudoc'odigos}
+
+La creaci'on del Interval Tree es de la siguiente forma:
+
+Se calcula el rango de las fotos, para saber el menor inicio y mayor final. Una vez calculado esto, se procede a tomar un punto cercano al medio. Con este punto como pivot, se generan tres listas. Una con aquellos intervalos que contienen al pivot, llamada centro; otra con los intervalos que estan completamente a la izquierda, llamada izquierda; y por ultimo otra con los que estan a la derecha del punto, llamada derecha.
+
+Para ver a que lista pertenece, se utilizan las funciones Contiene, Anterior y Posterior. La primera verifica si el pivot esta entre el inicio y el fin del intervalo. La segunda, si el final del intervalo es menor al punto, entonces, esta a la izquierda del mismo. Y la tercera, si el inicio es mayor al punto, el intervalo, entonces, es posterior.
+Una vez generadas estas listas, se crea el nodo con: el pivot utilizado para comparar y la lista Centro. 
+
+El nodo genera internamente sus miembros: el pivot se mantiene, la lista Inicio es generada ordenando a la lista Centro por sus inicios, y la lista Fin ordenando a la misma lista, pero por sus finales.
+Al estar creado el nodo, se inserta en una lista.
+
+Para ordenar se utiliza el algoritmo QuickSort, al ser un algoritmo eficiente en caso promedio. Se eligio sobre otras opciones como el SelectionSort, BubbleSort o InsertionSort, ya que estos son peores en la practica al elegido.
+
+El procedimiento se vuelve a repetir con la listas Izquierda y Derecha, agregando los nodos a la misma lista.
+
+Al terminar este proceso recursivo, se agregan los nodos al arbol RB.
+
+\vspace{2em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Analisis de complejidad
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Analisis de complejidad - Modelo Uniforme}
+{\bf\small Temporal}
+\subsection{Creaci'on}
+El peor caso para la creaci'on del Interval es que todos los intervalos sean disjuntos, lo que provocar'ia que en la lista Centro de cada nodo, haya solo un intervalo. Vamos a tomar este caso para analizar la complejidad.
+
+La complejidad de las funciones Anterior, Posterior y Contiene es O(1), ya que solo realiza una comparaci'on y devuelve true o false.
+
+La complejidad de BuscoRango es O(n), ya que recorre todos los intervalos para encontrar el menor inicio y el mayor fin. Dentro del while, las operaciones son O(1).
+
+Dentro del algoritmo del constructor, se llama una vez a la funcion BuscoRango y se repiten n veces las funciones Anterior, Posterior y Contiene. Luego, se repite recursivamente $\log_2(n)$ veces. Por lo tanto la complejidad es del orden $n \log_2(n)$.
+
+El tamaño de la entrada se calcula de la siguiente manera. La entrada contiene la cantidad de fotos, n, y sus coordenadas. Los valores de las coordenadas estan acotadas por el tamaño de la pantalla, lo que hace que sea constante, por lo cual, el tamaño de la entrada queda $\log_2(n)+n$, que es del orden de n.
+
+Por lo cual, la complejidad de la creaci'on queda O($\log_2(n)+n$).
+
+{\bf\small Espacial}
+
+La complejidad espacial de la creaci'on del Interval Tree es la siguiente: en cada nodo se guardan 2 enteros y 2 listas iguales de enteros con la cantidad de fotos que tocan a ese punto. Esto se repite, en peor caso, n veces. Por lo tanto, el orden de complejidad del algoritmo es O($n$).
+
+ \clearpage
