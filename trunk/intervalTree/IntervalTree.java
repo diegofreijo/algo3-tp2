@@ -2,7 +2,6 @@ package intervalTree;
 
 import java.util.ArrayList;
 import java.util.List;
-import boobleart.Instancia;
 import boobleart.Intervalo;
 import RedBlack.*;
 
@@ -10,14 +9,13 @@ public class IntervalTree
 {
 	private RBtree arbol = new RBtree();
 
-	//public RBtree arbol = new RBtree();
 	public IntervalTree(List<Intervalo> intervalos)
 	{
 		Nodos nodos = ArmarNodos(intervalos);
 		int i = 0;
 		while (i < nodos.nodos.size())
 		{
-			//System.out.println(i);
+			// System.out.println(i);
 			arbol.insertar(nodos.nodos.get(i).pivot, nodos.nodos.get(i));
 			i++;
 		}
@@ -31,7 +29,7 @@ public class IntervalTree
 		Rango rango = BuscoRango(intervalos);
 		Integer pivot = rango.fin - rango.inicio;
 		pivot = rango.inicio + pivot / 2;
-		//System.out.println(pivot);
+		// System.out.println(pivot);
 		int i = 0;
 		while (i < intervalos.size())
 		{
@@ -132,16 +130,16 @@ public class IntervalTree
 	{
 		boolean salir = false;
 		List<Intervalo> interv = new ArrayList<Intervalo>();
-		
-		//RBtree arbolAux = new RBtree();
+		// RBtree arbolAux = new RBtree();
 		Nodo2 nodoAux = new Nodo2();
 		nodoAux = arbol.raiz();
 		while (!salir)
 		{
 			if (nodoAux.key < valorBusq)
 			{
-				//si la clave es menor agrego a la solucion los intervalos que terminan 
-				//despues que 'valorBusq' y voy para la derecha.
+				// si la clave es menor agrego a la solucion los intervalos que
+				// terminan
+				// despues que 'valorBusq' y voy para la derecha.
 				System.out.println("1: " + nodoAux.key);
 				interv.addAll(dameTermDespues(nodoAux.valor, valorBusq));
 				if (nodoAux.der() != null)
@@ -155,8 +153,9 @@ public class IntervalTree
 			}
 			else if (nodoAux.key > valorBusq)
 			{
-				//si la clave es mayor agrego a la solucion los intervalos que empiezan 
-				//antes que 'valorBusq' y voy para la izquierda.
+				// si la clave es mayor agrego a la solucion los intervalos que
+				// empiezan
+				// antes que 'valorBusq' y voy para la izquierda.
 				System.out.println("2: " + nodoAux.key);
 				interv.addAll(dameEmpAntes(nodoAux.valor, valorBusq));
 				if (nodoAux.izq() != null)
@@ -172,10 +171,11 @@ public class IntervalTree
 			}
 			else
 			{
-				//si es igual al valor de la raiz agrego todos los intervalos a la solucion
+				// si es igual al valor de la raiz agrego todos los intervalos a
+				// la solucion
 				interv.addAll(nodoAux.valor.inicio);
 				System.out.println("3: " + nodoAux.key);
-				//salir=true; //nose si esta bien esto
+				// salir=true; //nose si esta bien esto
 				if (nodoAux.der() != null)
 				{
 					nodoAux = nodoAux.der();
@@ -208,9 +208,9 @@ public class IntervalTree
 		List<Intervalo> intervSol = new ArrayList<Intervalo>();
 		List<Intervalo> intervalos = new ArrayList<Intervalo>();
 		intervalos = nodo.inicio;
-		//int i = 0;
+		// int i = 0;
 		int i = intervalos.size() - 1;
-		//while(i < intervalos.size() && (intervalos.get(i).inicio) <= valor){
+		// while(i < intervalos.size() && (intervalos.get(i).inicio) <= valor){
 		while (i >= 0 && (intervalos.get(i).inicio) <= valor)
 		{
 			intervSol.add(intervalos.get(i));
@@ -256,12 +256,11 @@ public class IntervalTree
 		public List<Nodo> nodos = new ArrayList<Nodo>();
 	}
 
-	//public static void main(String[] args)
+	// public static void main(String[] args)
 	public static void main()
 	{
 		List<Intervalo> lista = new ArrayList<Intervalo>();
 		List<Intervalo> lista2 = new ArrayList<Intervalo>();
-		
 		IntervalTree RBinterv = new IntervalTree(lista);
 		System.out.println("key: " + RBinterv.arbol.raiz().key);
 		System.out.println("val ini: " + RBinterv.arbol.raiz().valor.inicio);
