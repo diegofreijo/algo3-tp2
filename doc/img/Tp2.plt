@@ -15,10 +15,10 @@ set output "Tp2(consulta).png"
 plot '..\..\dat\Tp2(consulta).dat' tit 'Práctica', x + log(x)/log(2) tit 'Teórica [log(n)+n]', 3*log(x)/log(2) + 3*x tit 'Teórica ajustada [3(log(n)+n)]'
 
 
-set xlabel "Producto de la cantidad de intervalos hallados en cada eje (kx*ky=k)"
+set xlabel "Cantidad de imágenes (n)"
 set ylabel "Operaciones básicas"
 set output "Tp2(fusion).png"
-plot '..\..\dat\Tp2(fusion).dat' tit 'Práctica', x tit 'Teórica [k]', 2*x tit 'Teórica ajustada [2k]'
+plot '..\..\dat\Tp2(fusion).dat' tit 'Práctica', x tit 'Teórica [k]', 6*x tit 'Teórica ajustada [6k]'
 
 
 set xlabel "Cantidad de imágenes (n)"

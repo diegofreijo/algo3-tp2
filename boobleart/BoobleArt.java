@@ -102,26 +102,31 @@ public abstract class BoobleArt
 		List<Intervalo> intersecciones_y = arbol_y.BuscarInterseccion(p.y); ++es.fusion;
 		ResultadoConsulta resultado = new ResultadoConsulta(); ++es.fusion;
 
-		// Guardo la cantidad de intervalos encontrados para las estadisticas
-		es.intersecciones_fusion = intersecciones_x.size() * intersecciones_y.size();
-		
-		// Busco ids iguales en ambas intersecciones
-		for (int i = 0; i < intersecciones_x.size(); ++i)
+		// Marco las imagenes con intervalos validos
+		for(Intervalo intervalo: intersecciones_x)
 		{
 			++es.fusion;
-			for (int j = 0; j < intersecciones_y.size(); ++j)
-			{
-				++es.fusion;
-				++es.fusion;
-				if (intersecciones_x.get(i).id == intersecciones_y.get(j).id)
-				{
-					// Tengo un resultado, agrego la imagen correspondiente al id encontrado
-					resultado.imagenes.add(imagenes.get(intersecciones_x.get(i).id)); es.fusion+=3;
-					break;
-				}
-			}
+			intervalo.padre.seleccionado_x = true; ++es.fusion;
 		}
-
+		for(Intervalo intervalo: intersecciones_y)
+		{
+			++es.fusion;
+			intervalo.padre.seleccionado_y = true; ++es.fusion;
+		}
+		
+		// Veo cuales imagenes estan seleccionadas en ambos intervalos y las agrego como resultado
+		for(Imagen img: imagenes)
+		{
+			++es.fusion;
+			++es.fusion;
+			if(img.seleccionado_x && img.seleccionado_y)
+			{
+				resultado.imagenes.add(img); ++es.fusion;
+			}
+			img.seleccionado_x = false; ++es.fusion;
+			img.seleccionado_y = false; ++es.fusion;
+		}
+		
 		return resultado;
 	}
 	

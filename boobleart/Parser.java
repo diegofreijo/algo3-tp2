@@ -54,8 +54,10 @@ public abstract class Parser
 		        {
 		        	linea = LeerLinea(in.readLine().trim());
 		        	imagen = new Imagen(
-		        				new Intervalo(linea.get(0),linea.get(1),i), 
-		        				new Intervalo(linea.get(2),linea.get(3),i));
+		        				new Intervalo(linea.get(0),linea.get(1), null), 
+		        				new Intervalo(linea.get(2),linea.get(3), null));
+		        	imagen.x.padre = imagen;
+		        	imagen.y.padre = imagen;
 		        	instancia.imagenes.add(imagen);
 		        }
 		        ret.add(instancia);
@@ -190,9 +192,9 @@ public abstract class Parser
 	        
 	        // Cantidad de operaciones de fusion en funcion del producto de la cantidad de intervalos de ambos ejes 
 	        out = new BufferedWriter(new FileWriter(ruta_fusion, true));
-	        for(List<Long> f: es.fusiones)
+	        for(Long op: es.fusiones)
 	        {
-	        	out.write(f.get(0) + " " + f.get(1) + "\n");
+	        	out.write(es.cant_img + " " + op + "\n");
 	        }
 	        out.close();
 	        
@@ -200,7 +202,7 @@ public abstract class Parser
 	        out = new BufferedWriter(new FileWriter(ruta_consulta_mas_fusion, true));
 	        for(int i = 0; i < es.consultas.size(); ++i)
 	        {
-	        	out.write(es.cant_img + " " + (es.consultas.get(i) + es.fusiones.get(i).get(1)) + "\n");
+	        	out.write(es.cant_img + " " + (es.consultas.get(i) + es.fusiones.get(i)) + "\n");
 	        }
 	        out.close();
 	        

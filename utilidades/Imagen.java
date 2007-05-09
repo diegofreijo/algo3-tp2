@@ -3,11 +3,14 @@ package utilidades;
 public class Imagen
 {
 	public Intervalo x, y;
+	public boolean seleccionado_x, seleccionado_y;
 	
 	public Imagen(Intervalo x, Intervalo y)
 	{
 		this.x = x;
 		this.y = y;
+		this.seleccionado_x = false;
+		this.seleccionado_y = false;
 	}
 	
 	public String toString()
