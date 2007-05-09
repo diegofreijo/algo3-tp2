@@ -1,5 +1,5 @@
 \section{Pseudoc'odigos}
-\algoritmo{Insertar($k$, $valor$)}{}{}
+\algoritmo{Insertar($k$, $valor$)}{Inserta un nodo en el arbol (como si fuera un 'arbol binario de b'usqueda) y luego reestablece el invariante del RedBlackTree}{O($log(n)$)}
 \begin{algorithmic}[1]
 \STATE $elem.construir(k, valor)$
 \STATE $y \leftarrow null$
@@ -20,8 +20,8 @@
 \ELSE
 	\STATE $y.der \leftarrow elem$
 \ENDIF
-\STATE $this.tamanio++$
-\STATE $arreglarInv(elem)$
+\STATE $incremento el tamaño del arbol en 1$
+\STATE $reestablecer invariante$
 \end{algorithmic}
 
 \vspace{2em}
