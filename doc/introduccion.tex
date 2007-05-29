@@ -3,8 +3,19 @@ Lo primero que se pens'o fue en como dise'nar e implementar los dos tipos de 'ar
 
 El red-black se dise'no sobre punteros. Cada 'arbol apunta a dos sub'arboles. En realidad la informaci'on se encuentra sobre nodos, pero solamente para mantenerla de forma m'as sencilla. Los algoritmos se basaron en los dados en clase, realizando las debidas rotaciones cuando, durante cierta inserci'on, se requiera para mantener el invariante de la estructura.
 
+Para la elaboracion del Interval, primero se buscaron datos del mismo para complementar los entregados en el apunte dado por la catedra. Luego de revisar varios papers, se decidio seguir por la implementacion del pseudo-codigo suministrado por la Wikipedia, previa comparacion con los demas.
+
+El arbol de intervalos es una estructura ordenada de datos que contiene intervalos. Sirve, principalmente, para poder encontrar, en una lista de intervalos, aquellos que se solapan con un punto dado o con un rango dado.
+Este tipo de arboles se utilizan por sobre, por ejemplo, los arboles binarios ordinarios, debido a que, en los ultimos, el costo de una consulta sobre el arbol es del orden de $O(n)$, y en un arbol de intervalos, el orden obtenido es de $O(log_2(n)+m$ (Se explica con mas detalle en la seccion "Calculos de complejidad).
+
+Este arbol se implemento sobre un Arbol Red-Black, para que siempre quede balanceado, ante cada insercion en el mismo. Tambien se podria haber usado un arbol binario o un AVL, pero se prefirio el RB ya que su comportamiento ante la insercion es mas estable que el AVL.
+
 El interval contiene los algoritmos correspondientes para la inserci'on y la b'usqueda de valores, pero en realidad la informaci'on est'a guardada en un red-black. En cada nodo del 'arbol tenemos guardadas 2 listas, con los mismos intervalos, pero ordenadas de diferente manera. Una lista est ordena de mayor a menor por el valor de inicio de cada intervalo. La otra lista esta ordena, tambi'en de mayor a menor, pero por el valor de fin de cada intervalo.
 Con una sola lista no alcanza ya que dependiendo el caso, necesito buscar por el valor de inicio o por el valor de fin.
+
+Se procedio a implementar la estructura de la siguiente forma:
+
+Para la creacion, el articulo sugiere tomar el rango total de los intervalos y dividirlo por la mitad, para tomar el elemento medio como pivot de la primera iteracion. Una vez hecho esto, se prodece a dividir la lista de intervalos en 3: aquellos que estan completamente a la izquierda del pivot, aquellos que lo contienen y por ultimo, aquellos que estan posterior al mismo. Una vez hecho esto, se inserta un nodo con el pivot como clave y como dato la lista generada que contiene a ese punto, pero esta ultima aparece en dos oportunidades. La primera, ordenando a los intervalos segun su punto de inicio, y la segunda, ordenandolos segun su punto de fin. Luego, se procede a realizar el algoritmo, pero ya con las dos listas restantes.
 
 Al realizar una b'usqueda y tener la listas ordendas se reduce la cantidad de operaciones para obtener los intervalos deseados(los que contienen al punto dado) ya que en caso de recorrer y tener que devolver una cantidad de intervalos menor a la total no me hace falta recorrerla hasta el final, sino que al ir comparando el valor de inicio o fin, seg'un corresponda, de cada intervalo y al encontrar un valor menor o mayor, tambien seg'un corresponda, puedo devolver los intervalos agregados hasta el momento a la soluci'on y salir de la busqueda sin necesidad de seguir recorriendo porque ya se que mas adelante no voy a encontrar ning'un intervalo que contenga al punto dado. 
 Si la lista estar'ia desordenada si o si deber'ia recorrer todos los intervalos ya que en nin'un momento puedo predecir el valor de inicio o fin del intervalo siguiente.

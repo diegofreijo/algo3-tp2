@@ -26,6 +26,25 @@
 
 \vspace{2em}
 
+\algoritmo{Constructor($intervalos$}}{Crea el arbol de intervalos a partir de una lista de ellos}{O($n log(n)$)}
+\begin{algorithmic}[1]
+\STATE $pivot \leftarrow (inicioRango - finRango)/2 + inicioRango$
+\WHILE{$i < intervalos.tam$}
+	\IF{intervalos[i] es anterior a pivot}
+		\STATE $anteriores.agregar(intervalos[i])$
+	\ELSIF{intervalos[i] es posterior a pivot}
+		\STATE $posteriores.agregar(intervalos[i])$
+	\ELSE
+		\STATE $centro.agregar(intervalos[i])$
+	\ENDIF
+\ENDWHILE
+\STATE $nodo \leftarrow crearNodo(centro,pivot)$
+\STATE $InsertarenRB(nodo)$
+\STATE $InsertarTodosenRB(Constructor(izquierda))$
+\STATE $InsertarTodosenRB(Constructor(derecha))$
+\end{algorithmic}
+
+
 La creaci'on del Interval Tree es de la siguiente forma:
 
 Se calcula el rango de las fotos, para saber el menor inicio y mayor final. Una vez calculado esto, se procede a tomar un punto cercano al medio. Con este punto como pivot, se generan tres listas. Una con aquellos intervalos que contienen al pivot, llamada centro; otra con los intervalos que estan completamente a la izquierda, llamada izquierda; y por ultimo otra con los que estan a la derecha del punto, llamada derecha.
