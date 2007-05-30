@@ -10,6 +10,7 @@
 \usepackage{latexsym}
 \usepackage{algorithmic}													% Para escribir los algos
 \usepackage{dsfont}															% Para el simbolo de naturales
+\usepackage[font=small,labelfont=bf]{caption}						% Para editar las captions
 
 
 % Estilo de pagina para tener las cabeceras
@@ -26,9 +27,9 @@
 
 \newcommand{\imagen}[3]
 {
-	\begin{figure}[h]
+	\begin{figure}[htbp]
 	  \centering
-	    \includegraphics[width=#2cm]{#1}
+	    \includegraphics[scale=0.5]{#1}
 	  \caption{#3}
 	\end{figure}
 }
@@ -42,6 +43,14 @@
 
 }
 \newcommand{\negrita}[1]{{\bf #1}}
+
+\renewcommand\floatpagefraction{.9}
+\renewcommand\topfraction{.9}
+\renewcommand\bottomfraction{.9}
+\renewcommand\textfraction{.1}   
+\setcounter{totalnumber}{50}
+\setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,7 +103,7 @@ Red-Black Trees, Interval Trees.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Respuestas
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{Respuestas}
+\subsection{Respuestas}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Analisis de complejidad
