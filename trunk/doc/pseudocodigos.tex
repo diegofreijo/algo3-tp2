@@ -26,7 +26,7 @@
 
 \vspace{2em}
 
-\algoritmo{Constructor($intervalos$}}{Crea el arbol de intervalos a partir de una lista de ellos}{O($n log(n)$)}
+\algoritmo{Constructor($intervalos$)}{Crea el arbol de intervalos a partir de una lista de ellos}{O($n log(n)$)}
 \begin{algorithmic}[1]
 \STATE $pivot \leftarrow (inicioRango - finRango)/2 + inicioRango$
 \WHILE{$i < intervalos.tam$}
@@ -117,7 +117,7 @@ Al terminar este proceso recursivo, se agregan los nodos al arbol RB.
 
 \vspace{2em}
 
-\algoritmo{Fusionar($p, arbol_x, arbol_y, imagenes$)}{En realidad llamado BuscarInterseccion, devuelve las im'agenes en $imagenes$ que contienen al punto $p$ utilizando los 'arboles}{O($n$)}
+\algoritmo{Fusionar\_SinPoda($p, arbol_x, arbol_y, imagenes$)}{Devuelve las im'agenes en $imagenes$ que contienen al punto $p$ utilizando los 'arboles}{$\Theta(n)$}
 \begin{algorithmic}[1]
 \STATE $intersecciones_x$ = $arbol_x$.BuscarInterseccion($p$)
 \STATE $intersecciones_y$ = $arbol_y$.BuscarInterseccion($p$)
@@ -132,6 +132,29 @@ Al terminar este proceso recursivo, se agregan los nodos al arbol RB.
 		\STATE $resultados$.agregar($img$)
 	\ENDIF
 	\STATE limpiar marcas de $img$
+\ENDFOR
+\RETURN $resultados$
+\end{algorithmic}
+
+\vspace{2em}
+
+\algoritmo{Fusionar\_ConPoda($p, arbol_x, arbol_y$)}{Devuelve las im'agenes que contienen al punto $p$ utilizando los 'arboles}{O($n$)}
+\begin{algorithmic}[1]
+\STATE $intersecciones_x$ = $arbol_x$.BuscarInterseccion($p$)
+\STATE $intersecciones_y$ = $arbol_y$.BuscarInterseccion($p$)
+\FORALL{$int$ {\bf in} $intersecciones_x$}
+	\STATE $imagenes_x$.agregar($int$.padre) 
+\ENDFOR
+\FORALL{$int$ {\bf in} $intersecciones_y$}
+	\STATE marcar al padre de $int$ en $y$
+\ENDFOR
+\FORALL{$img$ {\bf in} $imagenes_x$}
+	\IF{$img$ est'a marcado en $y$}
+		\STATE $resultados$.agregar($img$)
+	\ENDIF
+\ENDFOR
+\FORALL{$int$ {\bf in} $intersecciones_y$}
+	\STATE resetear al padre de $int$ en $y$
 \ENDFOR
 \RETURN $resultados$
 \end{algorithmic}

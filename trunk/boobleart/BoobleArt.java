@@ -1,6 +1,8 @@
 package boobleart;
 
 import interval_tree.IntervalTree;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 import utilidades.Diferencias;
@@ -62,7 +64,7 @@ public abstract class BoobleArt
 			resultados = new ArrayList<ResultadoConsulta>();
 			for (Punto p : consultas)
 			{
-				resultados.add(BuscarInterseccion(p, arbol_x, arbol_y, instancia.imagenes));
+				resultados.add(Fusionar_ConPoda(p, arbol_x, arbol_y, instancia.imagenes));
 				es.Almacenar();
 			}
 			
@@ -96,7 +98,7 @@ public abstract class BoobleArt
 		if(comparar) System.out.println("Diferencias encontradas: " + cant_diferencias);
 	}
 	
-	private static ResultadoConsulta BuscarInterseccion(Punto p, IntervalTree arbol_x, IntervalTree arbol_y, List<Imagen> imagenes)
+	private static ResultadoConsulta Fusionar_SinPoda(Punto p, IntervalTree arbol_x, IntervalTree arbol_y, List<Imagen> imagenes)
 	{
 		List<Intervalo> intersecciones_x = arbol_x.BuscarInterseccion(p.x); ++es.fusion;
 		List<Intervalo> intersecciones_y = arbol_y.BuscarInterseccion(p.y); ++es.fusion;
@@ -129,6 +131,51 @@ public abstract class BoobleArt
 		
 		return resultado;
 	}
+	
+	private static ResultadoConsulta Fusionar_ConPoda(Punto p, IntervalTree arbol_x, IntervalTree arbol_y, List<Imagen> imagenes)
+	{
+		List<Intervalo> intersecciones_x = arbol_x.BuscarInterseccion(p.x); ++es.fusion;
+		List<Intervalo> intersecciones_y = arbol_y.BuscarInterseccion(p.y); ++es.fusion;
+		ResultadoConsulta resultado = new ResultadoConsulta(); ++es.fusion;
+		
+		// Imagenes conteniendo los intervalos en x. En y no hace falta (en realidad seria inutil)
+		List<Imagen> imagenes_x = new LinkedList<Imagen>(); ++es.fusion;
+		
+		// Marco las imagenes con intervalos validos
+		for(Intervalo intervalo: intersecciones_x)
+		{
+			++es.fusion;
+			imagenes_x.add(intervalo.padre); ++es.fusion;
+		}
+		for(Intervalo intervalo: intersecciones_y)
+		{
+			++es.fusion;
+			intervalo.padre.seleccionado_y = true; ++es.fusion;
+		}
+		
+		// Veo cuales imagenes estan seleccionadas en y entre las que ya lo estaban en x
+		for(Imagen img: imagenes_x)
+		{
+			++es.fusion;
+			++es.fusion;
+			if(img.seleccionado_y)
+			{
+				resultado.imagenes.add(img); ++es.fusion;
+			}
+		}
+		
+		// Seteo la seleccion en y de nuevo en false de todos los alterados (los de intersecciones_y)
+		for(Intervalo intervalo: intersecciones_y)
+		{
+			++es.fusion;
+			intervalo.padre.seleccionado_y = false; ++es.fusion;
+		}
+		
+		return resultado;
+	}
+	
+	
+	////////////////////////////// Fuerza Bruta //////////////////////////////
 	
 	private static List<ResultadoConsulta> BuscarInterseccionFB(Instancia instancia, List<Punto> consultas)
 	{

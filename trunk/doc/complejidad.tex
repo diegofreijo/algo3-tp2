@@ -36,8 +36,8 @@ Ya que cada segmento es guardado en dos listas y el 'arbol es balanceado.
 
 \subsection{Fusionar}
 \subsubsection{Temporal}
-Como se explic'o anteriormente en la introducci'on del presente, en el peor de los casos 'este algoritmo deber'a recorrer 3 veces todas las im'agenes (caso en el que el punto est'e contendio en toda im'agen de la pantalla). Por lo que la complejidad ser'a O($3n$) = O($n$).
+Como se explic'o anteriormente en la introducci'on del presente, en el peor de los casos 'este algoritmo deber'a recorrer 3 veces todas las im'agenes (caso en el que el punto est'e contendio en toda im'agen de la pantalla). Por lo que la complejidad ser'a O($3n$) = O($n$). Notar que siempre se recorren todas las im'agenes, por lo que tambi'en es $\Omega(n)$, arrojando $\Theta(n)$. En cambio, la poda puede llegar a ser O($n$), pero no tiene cota inferior definida (excepto la trivial de 1).
 
 \subsubsection{Espacial}
-El algoritmo s'olo requiere (sin contar el espacio para la lista de resultados) los bits de seleccionado en las im'agenes y las referencias a los padres en cada intervalo. Por lo que se requieren cantidad de n'umeros del 'orden de la cantidad de im'agenes, siendo la complejidad O($n$).
+El algoritmo s'olo requiere (sin contar el espacio para la lista de resultados) los bits de seleccionado en las im'agenes y las referencias a los padres en cada intervalo. Por lo que se requieren cantidad de n'umeros del 'orden de la cantidad de im'agenes, siendo la complejidad O($n$). Notar que en la versi'on con poda requiere adem'as de la lista provisoria de im'agenes en x, que suma $n$ a la complejidad por lo que no var'ia. Pero tiene de ventaja (aunque no sea demasiada) que cada im'agen no requiere el bit de seleccionado en x.
 
