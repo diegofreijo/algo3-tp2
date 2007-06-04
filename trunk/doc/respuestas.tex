@@ -1,23 +1,17 @@
 
 \section{Respuestas}
-En este caso, se analiza como seria el programa, si se agregasen fotos al mapa.
 
+Por como fueron hechos los algoritmos para la creaci'on, inserci'on y rotaci'on del RedBlack no es necesario rehacer el arbol completo. 
 
-El problema que se presenta es que el Interval Tree esta pensado para, una vez creado, no ser modificado. Al intentar ingresar un intervalo nuevo, este podria agrandar el rango, y asi no quedaria la idea original plasmada, ya que ya no seria el pivot el elemento elegido.
+En este caso, se analiza como seria el algoritmo de "insertarIntervalo", si se agregasen fotos al mapa.
 
+Para agregar un intervalo al intervalTree la idea es recorrer el 'arbol viendo si algun pivot es contenido por el nuevo intervalo, si es as'i, 'este se inserta en las dos listas ordenadas ordenadamente. Sino, se crea un nuevo nodo con el intervalo a insertar, el pivot del nuevo nodo seria (intervalo.fin+intervalo.inicio)/2, luego insertamos este nodo en el redblack.
+En el caso en que insertamos en un nodo existente, no importa que con el intervalo que insertamos el rango m'aaximo cambie, debido a que el pivot solo nos indica que las listas en el nodo contienen a ese pivot. El hecho de que cuando se crea el intervalTree el pivot sea el mayor rango a representar dividido dos, es solo para disminuir la complejidad de creaci'on del intervalTree y nos proporciona un relativo balanceo si no lo representamos sobre una estructura balanceada, pero como implementamos el IntervalTree sobre un RedBlack, el balanceamiento esta asegurado.
 
-Para resolverlo, se propone, en la funcion "Insertar Foto", crear nuevamente ambos arboles de intervalos, conteniendo los nuevos intervalos, para que se balancee nuevamente y asi no modificar su complejidad.
+Si existe un nodo con un pivot que es contenido por este intervalo, la complejidad de insertar es:
+log_2(n) para buscar el nodo en el que vamos a insertar + 2*q (q es la longitud de las listas que contiene el nodo) que es lo que nos cuesta insertar el intervalo ordenadamente en las dos listas del nodo.
+Por lo tanto la complejidad es: O($\log_2(n) + q$).
 
+En el caso en que no exista un pivot que pertenezca al nuevo intervalo, y tengamos que crear el nuevo nodo la complejidad es solo la de insertar en el RedBlack, que es O($\log_2(n)+k$)
 
-Otra alternativa, es, por ejemplo en el caso en que la nueva foto no modifique el rango total, ir viendo nodo por nodo para ver en cual se puede insertar, y ahi ponerlo en las listas, ordenandolas nuevamente.
-
-
-En el primer caso, la complejidad seria la de crear otra vez los dos arboles, o sea O($n\log_2(n)$).
-
-
-En el segundo, la complejidad seria similar a la busqueda, recorriendo el arbol, y una vez encontrado el nodo indicado, agregar a las listas y ordenar. En este caso es O($\log_2(n) + 2n\log_2(n)$). Se remarca que en la parte de ordenar, la lista va a estar practicamente ordenada, lo que achica, en practica, la complejidad del algoritmo.
-
-Una vez realizado esto, la interfaz superior del programa no se modifica, a excepci'on de agregar la funcion insertar. El resto de las complejidades se mantienen como son.
-
-Hay que remarcar que esta es una variante al Interval Tree, ya que este no esta pensado, en su version standard, para realizar inserciones.
-
+Notar que tanto k como q pueden ser m, donde m es la cantidad de fotos.

@@ -1,7 +1,7 @@
 \section{Introducci'on}
 Lo primero que se pens'o fue en como dise'nar e implementar los dos tipos de 'arboles propuestos en el enunciado. La idea fue utilizar el interval tree ('arbol de intervalos) manteniendo el equilibrio de sus nodos mediante el red-black tree ('arbol rojo-negro) para obtener una complejidad eficiente, a'un en el peor caso. 
 
-El red-black se dise'n'o sobre punteros. Cada 'arbol apunta a dos sub'arboles. En realidad la informaci'on se encuentra sobre nodos, pero solamente para mantenerla de forma m'as sencilla. Los algoritmos se basaron en los dados en clase, realizando las debidas rotaciones cuando, durante cierta inserci'on, se requiera para mantener el invariante de la estructura.
+El red-black se dise'n'o sobre nodos. Cada nodo posee un puntero al nodo padre, y a sus dos hijos, ademas de contener la clave(Integer) y el valor(el Nodo del Interval Tree). La informaci'on se encuentra sobre nodos, pero solamente para mantenerla de forma m'as sencilla. Los algoritmos se basaron en los dados en clase, realizando las debidas rotaciones cuando, durante cierta inserci'on, se requiera para mantener el invariante de la estructura.
 
 Para la elaboraci'on del Interval, primero se buscaron datos del mismo para complementar los entregados en el apunte dado por la catedra. Luego de revisar varios papers, se decidio seguir por la implementacion del pseudo-codigo suministrado por la Wikipedia, previa comparacion con los demas.
 
