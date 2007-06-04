@@ -1,5 +1,5 @@
 \section{Pseudoc'odigos}
-\algoritmo{Insertar($k$, $valor$)}{Inserta un nodo en el arbol (como si fuera un 'arbol binario de b'usqueda) y luego reestablece el invariante del RedBlackTree}{O($log(n)$)}
+\algoritmo{Insertar($k$, $valor$)}{Inserta un nodo en el arbol (como si fuera un 'arbol binario de b'usqueda) y luego reestablece el invariante del RedBlackTree}{O($log(n)+k$)}
 \begin{algorithmic}[1]
 \STATE $elem.construir(k, valor)$
 \STATE $y \leftarrow null$
@@ -23,6 +23,16 @@
 \STATE $incremento el tamaño del arbol en 1$
 \STATE $reestablecer invariante$
 \end{algorithmic}
+
+En la implementaci'on del RedBlack, el costo de hacer las rotaciones no es constante, cuesta O($k$) donde k es la cantidad de intervalos que tengo que mover que posee el nodo que es pasado como parametro en la funcion rotar.
+Esta complejidad es debido a que cuando el RB hace una rotaci'on, la propiedad del Interval Tree que dice que dado una clave de un nodo, todos los intervalos que poseen los nodos que estan en la rama izquierda son menores a la clave(es decir, el pivot). Y todos los intervalos que poseen los nodos que estan en la rama derecha son mayores a la clave.
+Esta propiedad implicita en la creaci'on es reestablecida haciendo una serie de movimientos de intervalos entre los nodos que intervienen en la rotaci'on.
+Por ejemplo si se efectua insercion que requiere una rotacion a derecha como la siguiente:
+
+\imagen{img/after_insert.PNG}{14} \imagen{img/after_rot.PNG}{14}
+
+Los intervalos que cambian son solo los de el nodo A y B, mas especificamente intervalos de A pasan a B.
+Los intervalos que deben pasar a B son todo aquellos que esten en A tal que en sus intervalos incluyan la clave de B(es decir, el pivot). Esta opercacion es O($k$) donde k en este caso es igual a la cantidad de intervalos de A.
 
 \vspace{2em}
 
