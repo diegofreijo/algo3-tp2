@@ -9,7 +9,7 @@ Para agregar un intervalo al intervalTree la idea es recorrer el 'arbol viendo s
 En el caso en que insertamos en un nodo existente, no importa que con el intervalo que insertamos el rango m'aaximo cambie, debido a que el pivot solo nos indica que las listas en el nodo contienen a ese pivot. El hecho de que cuando se crea el intervalTree el pivot sea el mayor rango a representar dividido dos, es solo para disminuir la complejidad de creaci'on del intervalTree y nos proporciona un relativo balanceo si no lo representamos sobre una estructura balanceada, pero como implementamos el IntervalTree sobre un RedBlack, el balanceamiento esta asegurado.
 
 Si existe un nodo con un pivot que es contenido por este intervalo, la complejidad de insertar es:
-log_2(n) para buscar el nodo en el que vamos a insertar + 2*q (q es la longitud de las listas que contiene el nodo) que es lo que nos cuesta insertar el intervalo ordenadamente en las dos listas del nodo.
+$\log_2(n)$ para buscar el nodo en el que vamos a insertar + 2*q (q es la longitud de las listas que contiene el nodo) que es lo que nos cuesta insertar el intervalo ordenadamente en las dos listas del nodo.
 Por lo tanto la complejidad es: O($\log_2(n) + q$).
 
 En el caso en que no exista un pivot que pertenezca al nuevo intervalo, y tengamos que crear el nuevo nodo la complejidad es solo la de insertar en el RedBlack, que es O($\log_2(n)+k$)
