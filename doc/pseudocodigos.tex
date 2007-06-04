@@ -29,7 +29,8 @@ Esta complejidad es debido a que cuando el RB hace una rotaci'on, la propiedad d
 Esta propiedad implicita en la creaci'on es reestablecida haciendo una serie de movimientos de intervalos entre los nodos que intervienen en la rotaci'on.
 Por ejemplo si se efectua insercion que requiere una rotacion a derecha como la siguiente:
 
-\imagen{img/after_insert.PNG}{14} \imagen{img/after_rot.PNG}{14}
+\imagen{img/after_insert.png}{14}{}
+\imagen{img/after_rot.png}{14}{}
 
 Los intervalos que cambian son solo los de el nodo A y B, mas especificamente intervalos de A pasan a B.
 Los intervalos que deben pasar a B son todo aquellos que esten en A tal que en sus intervalos incluyan la clave de B(es decir, el pivot). Esta opercacion es O($k$) donde k en este caso es igual a la cantidad de intervalos de A.
