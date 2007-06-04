@@ -1,7 +1,10 @@
 package redblack_tree;
 
 import interval_tree.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import utilidades.*;
 public class RBtree
 {
 	private int tamanio;
@@ -184,6 +187,17 @@ public class RBtree
 		}
 		y.izq = elem;
 		elem.padre = y;
+		
+		// ahora muevo llos intervalos
+		List<Intervalo> lista = buscarX(elem.padre.valor.pivot, elem.valor.inicio);
+		
+		for(int i = 0; i < lista.size(); ++i){
+			elem.agregarOrdenadoInicio(lista.get(i),elem.padre.valor.inicio);
+			elem.agregarOrdenadoFin(lista.get(i),elem.padre.valor.fin);
+		}
+		for(int i = 0; i < lista.size(); ++i){
+			elem.valor.fin.remove(lista.get(i));
+		}
 	}
 
 	private void rotarDer(Nodo2 elem)
@@ -203,5 +217,33 @@ public class RBtree
 		}
 		x.der = elem;
 		elem.padre = x;
+		
+		// ahora muevo intervalos
+		List<Intervalo> lista = buscarX(elem.padre.valor.pivot, elem.valor.inicio);
+		
+		for(int i = 0; i < lista.size(); ++i){
+			elem.agregarOrdenadoInicio(lista.get(i),elem.padre.valor.inicio);
+			elem.agregarOrdenadoFin(lista.get(i),elem.padre.valor.fin);
+		}
+		for(int i = 0; i < lista.size(); ++i){
+			elem.valor.fin.remove(lista.get(i));
+		}
 	}
+	
+	// buscarX devuelve todos los intervalos de lista que contienen a x.
+	private List<Intervalo> buscarX(Integer x,List<Intervalo> lista){
+		List<Intervalo> res = new ArrayList<Intervalo>();
+		for(int i = 0; i < lista.size(); ++i){
+			if ((lista.get(i).inicio <= x) && (x <= lista.get(i).fin)){
+				res.add(lista.get(i));
+			}
+		}
+		for(int i = 0; i < lista.size(); ++i){
+			if ((lista.get(i).inicio <= x) && (x <= lista.get(i).fin)){
+				lista.remove(i);
+			}
+		}
+		return res;
+	}
+	
 }

@@ -1,5 +1,8 @@
 package redblack_tree;
 
+import java.util.List;
+
+import utilidades.Intervalo;
 import interval_tree.*;
 
 public class Nodo2
@@ -52,5 +55,29 @@ public class Nodo2
 	{
 		if (this.padre == this.padre.padre.izq) return this.padre.padre.der;
 		else return this.padre.padre.izq;
+	}
+	
+	public void agregarOrdenadoInicio(Intervalo x, List<Intervalo> lista){
+		int i = 0;
+		while(i < lista.size()){
+			if (x.inicio > lista.get(i).inicio){
+				lista.add(i,x);
+				return;
+			}
+		i++;
+		}
+		lista.add(i,x); //si la lista es vacia
+	}
+	
+	public void agregarOrdenadoFin(Intervalo x, List<Intervalo> lista){
+		int i = 0;
+		while(i < lista.size()){
+			if (x.fin > lista.get(i).fin){
+				lista.add(i,x);
+				return;
+			}
+		i++;
+		}
+		lista.add(i,x); //si la lista es vacia
 	}
 }
